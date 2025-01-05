@@ -1,0 +1,8 @@
+<resources>
+    <style name="Theme.KR" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Настройки темы -->
+        <item name="colorPrimary">#FDF7E3</item>
+        <item name="colorPrimaryDark">@color/button</item>
+        <item name="colorAccent">@color/white</item>
+    </style>
+</resources>

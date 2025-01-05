@@ -1,0 +1,75 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="8dp"
+    android:layout_margin="8dp"
+    android:elevation="4dp"
+    android:background="#FBF8EB">
+
+    <!-- Изображение отеля -->
+    <ImageView
+        android:id="@+id/trip_image"
+        android:layout_width="120dp"
+        android:layout_height="80dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/hotel_image" />
+
+    <!-- Информация о поездке -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:paddingStart="8dp">
+
+        <!-- Название отеля -->
+        <TextView
+            android:id="@+id/trip_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Грейс Аква Вилла 4*"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/button" />
+
+        <!-- Дата и стоимость -->
+        <TextView
+            android:id="@+id/trip_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Абхазия, Сухум\n24 - 31 июля 2023 г.\n10 349 руб."
+            android:textSize="12sp"
+            android:textColor="#6D6D6D" />
+
+        <!-- Действия: Оставить отзыв, Повторить бронирование -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/leave_review"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="★ Оставить отзыв"
+                android:textSize="12sp"
+                android:textColor="@color/button"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <TextView
+                android:id="@+id/repeat_booking"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="⟳ Повторить бронирование"
+                android:layout_marginStart="16dp"
+                android:textSize="12sp"
+                android:textColor="#6D6D6D"
+                android:clickable="true"
+                android:focusable="true" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
