@@ -9,7 +9,7 @@
         android:id="@+id/tvTripsTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Поездки"
+        android:text="Ваши поездки"
         android:textSize="18sp"
         android:textColor="@color/button"
         app:layout_constraintTop_toTopOf="parent"

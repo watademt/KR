@@ -2,10 +2,14 @@ package com.example.kr
 
 import TripsAdapter
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
+import android.widget.RatingBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,9 +28,34 @@ class PastTripsFragment : Fragment() {
         recyclerView.adapter = TripsAdapter(
             trips = getPastTrips(),
             onLeaveReview = { trip ->
-                // Логика для оставления отзыва
-                Toast.makeText(requireContext(), "Оставить отзыв для: ${trip.name}", Toast.LENGTH_SHORT).show()
-            },
+                val dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_review, null)
+                val dialog = AlertDialog.Builder(context)
+                    .setView(dialogView)
+                    .create()
+
+                val ratingBar = dialogView.findViewById<RatingBar>(R.id.review_rating)
+                val commentInput = dialogView.findViewById<EditText>(R.id.review_comment)
+                val submitButton = dialogView.findViewById<Button>(R.id.submit_button)
+                val cancelButton = dialogView.findViewById<Button>(R.id.cancel_button)
+
+                cancelButton.setOnClickListener {
+                    dialog.dismiss()
+                }
+
+                submitButton.setOnClickListener {
+                    val rating = ratingBar.rating
+                    val comment = commentInput.text.toString()
+                    if (rating > 0) {
+                        Toast.makeText(context, "Спасибо за отзыв!", Toast.LENGTH_SHORT).show()
+                        dialog.dismiss()
+                    } else {
+                        Toast.makeText(context, "Пожалуйста, поставьте оценку", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                dialog.show()
+            }
+            ,
             onRepeatBooking = { trip ->
                 // Логика для повторного бронирования
                 Toast.makeText(requireContext(), "Повторить бронирование для: ${trip.name}", Toast.LENGTH_SHORT).show()
