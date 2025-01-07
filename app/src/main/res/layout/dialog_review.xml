@@ -15,18 +15,22 @@
         android:textStyle="bold"
         android:layout_gravity="center" />
 
-    <!-- Рейтинг (звезды) -->
+    <!-- Поле для ввода отзыва -->
     <RatingBar
         android:id="@+id/review_rating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:numStars="5"
-        android:stepSize="1"
+        android:stepSize="1.0"
         android:layout_marginTop="16dp"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"
+        android:progressTint="@color/star_selected_color"
+        android:backgroundTint="@color/star_unselected_color"
+        android:isIndicator="false"
+        android:focusable="true"
+        android:clickable="true" />
 
 
-    <!-- Поле для ввода отзыва -->
     <EditText
         android:id="@+id/review_comment"
         android:layout_width="match_parent"

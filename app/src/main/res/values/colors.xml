@@ -8,4 +8,6 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="button">#4E3D33</color>
+    <color name="star_selected_color">#FFD700</color> <!-- Золотой -->
+    <color name="star_unselected_color">#D3D3D3</color> <!-- Светло-серый -->
 </resources>

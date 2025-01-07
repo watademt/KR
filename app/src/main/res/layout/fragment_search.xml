@@ -39,8 +39,9 @@
             android:layout_height="48dp"
             android:hint="Укажите город"
             android:drawableStart="@drawable/ic_search"
-            android:drawableTint="@color/button"
+            android:drawablePadding="8dp"
             android:background="@drawable/edittext_border"/>
+
 
         <!-- Поле даты -->
         <EditText

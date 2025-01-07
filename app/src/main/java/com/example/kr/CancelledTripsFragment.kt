@@ -36,15 +36,23 @@ class CancelledTripsFragment : Fragment() {
                 val submitButton = dialogView.findViewById<Button>(R.id.submit_button)
                 val cancelButton = dialogView.findViewById<Button>(R.id.cancel_button)
 
+                // Обработка нажатия на кнопку "Отмена"
                 cancelButton.setOnClickListener {
                     dialog.dismiss()
                 }
 
+                // Добавление слушателя для изменений в RatingBar
+                ratingBar.setOnRatingBarChangeListener { _, newRating, _ ->
+                    Toast.makeText(context, "Вы выбрали рейтинг: $newRating", Toast.LENGTH_SHORT).show()
+                }
+
+                // Обработка нажатия на кнопку "Отправить"
                 submitButton.setOnClickListener {
                     val rating = ratingBar.rating
                     val comment = commentInput.text.toString()
+
                     if (rating > 0) {
-                        Toast.makeText(context, "Спасибо за отзыв!", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, "Спасибо за отзыв с оценкой: $rating", Toast.LENGTH_SHORT).show()
                         dialog.dismiss()
                     } else {
                         Toast.makeText(context, "Пожалуйста, поставьте оценку", Toast.LENGTH_SHORT).show()
@@ -52,8 +60,7 @@ class CancelledTripsFragment : Fragment() {
                 }
 
                 dialog.show()
-            }
-            ,
+            },
             onRepeatBooking = { trip ->
                 // Логика для повторного бронирования
                 Toast.makeText(requireContext(), "Повторить бронирование для: ${trip.name}", Toast.LENGTH_SHORT).show()

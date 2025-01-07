@@ -1,6 +1,7 @@
 package com.example.kr
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
@@ -18,28 +19,41 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         // Отображение имени пользователя
         val userNameTextView = view.findViewById<TextView>(R.id.tvUserName)
         userNameTextView.text = username
+
         // Кнопка "Управление аккаунтом"
         view.findViewById<View>(R.id.btnAccountManagement).setOnClickListener {
-            // Логика управления аккаунтом
             Toast.makeText(requireContext(), "Управление аккаунтом", Toast.LENGTH_SHORT).show()
         }
 
         // Кнопка "Ваши отзывы"
         view.findViewById<View>(R.id.btnUserReviews).setOnClickListener {
-            // Логика для просмотра отзывов
             Toast.makeText(requireContext(), "Ваши отзывы", Toast.LENGTH_SHORT).show()
         }
 
         // Кнопка "Связаться с нами"
         view.findViewById<View>(R.id.btnContactUs).setOnClickListener {
-            // Логика для контактов
             Toast.makeText(requireContext(), "Связаться с нами", Toast.LENGTH_SHORT).show()
         }
 
         // Кнопка "Выход из аккаунта"
         view.findViewById<View>(R.id.btnLogout).setOnClickListener {
-            // Логика выхода из аккаунта
-            Toast.makeText(requireContext(), "Выход из аккаунта", Toast.LENGTH_SHORT).show()
+            // Очистка SharedPreferences
+            sharedPreferences.edit().clear().apply()
+
+            // Очистка кэша
+            requireContext().cacheDir.deleteRecursively()
+
+            // Уведомление пользователя
+            Toast.makeText(requireContext(), "Вы вышли из аккаунта. Кэш очищен.", Toast.LENGTH_SHORT).show()
+
+            // Переход на экран входа
+            val intent = Intent(requireContext(), LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK // Удаляем историю переходов
+            startActivity(intent)
+
+            // Завершаем текущую активность
+            requireActivity().finish()
         }
+
     }
 }
