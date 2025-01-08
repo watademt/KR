@@ -5,10 +5,16 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.Firebase
+import com.google.firebase.firestore.firestore
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //Проверка работы firestore(Потом удалить говно)
+//        val fs = Firebase.firestore
+//        fs.collection("hotels")
+//            .document().set(mapOf("name" to "Visockiy"))
 
         // Проверка статуса авторизации
         val sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE)
