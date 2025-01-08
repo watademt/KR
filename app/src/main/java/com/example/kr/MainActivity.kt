@@ -9,31 +9,33 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
 
-        // Проверка статуса авторизации
         val sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE)
         val isLoggedIn = sharedPreferences.getBoolean("is_logged_in", false)
 
         if (!isLoggedIn) {
-            // Если пользователь не авторизован, перенаправить на LoginActivity
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
-            finish() // Закрыть MainActivity
+            finish()
             return
         }
 
-        setContentView(R.layout.activity_main)
+        val openFragment = intent.getStringExtra("open_fragment")
 
-        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
-
-        // Установить стартовый фрагмент
-        if (savedInstanceState == null) {
+        // Проверяем, нужно ли открыть конкретный фрагмент
+        if (openFragment == "search") {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, SearchFragment())
+                .commit()
+        } else if (savedInstanceState == null) {
+            // Установить стартовый фрагмент
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, SearchFragment())
                 .commit()
         }
 
-        // Обработчик переключения вкладок
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.nav_search -> {
@@ -58,4 +60,5 @@ class MainActivity : AppCompatActivity() {
             .replace(R.id.fragment_container, fragment)
             .commit()
     }
+
 }

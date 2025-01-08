@@ -1,0 +1,87 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FBF8EB">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Выбор дат -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Выберите даты"
+            android:textSize="16sp"
+            android:paddingBottom="8dp" />
+
+        <Button
+            android:id="@+id/btnSelectStartDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Выберите дату заезда"
+            android:backgroundTint="@color/button"
+            android:textColor="@android:color/white"/>
+
+        <Button
+            android:id="@+id/btnSelectEndDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Выберите дату выезда"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/button"
+            android:textColor="@android:color/white"/>
+
+        <!-- Тип номера -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Тип номера"
+            android:textSize="16sp"
+            android:paddingTop="16dp" />
+
+        <Spinner
+            android:id="@+id/spinnerRoomType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- Количество и тип кроватей -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Количество кроватей"
+            android:textSize="16sp"
+            android:paddingTop="16dp" />
+
+        <EditText
+            android:id="@+id/etNumberOfBeds"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Введите количество кроватей"
+            android:inputType="number" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Тип кроватей"
+            android:textSize="16sp"
+            android:paddingTop="16dp" />
+
+        <Spinner
+            android:id="@+id/spinnerBedType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- Кнопка подтверждения -->
+        <Button
+            android:id="@+id/btnConfirmBooking"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Подтвердить бронирование"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="@color/button"
+            android:textColor="@android:color/white"/>
+    </LinearLayout>
+</ScrollView>
