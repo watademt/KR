@@ -1,12 +1,9 @@
 package com.example.kr
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.firebase.Firebase
-import com.google.firebase.firestore.firestore
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,13 +16,13 @@ class MainActivity : AppCompatActivity() {
 
         val sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE)
         val isLoggedIn = sharedPreferences.getBoolean("is_logged_in", false)
-
-        if (!isLoggedIn) {
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
-            finish()
-            return
-        }
+// Если это включить то вход не работает. На странице LoginActivity добавлена проверка на авторизованного пользоваетля
+//        if (!isLoggedIn) {
+//            val intent = Intent(this, LoginActivity::class.java)
+//            startActivity(intent)
+//            finish()
+//            return
+//        }
 
         val openFragment = intent.getStringExtra("open_fragment")
 
