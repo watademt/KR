@@ -40,6 +40,9 @@ class RegisterActivity : AppCompatActivity() {
                                     "Authentication Successful.",
                                     Toast.LENGTH_SHORT,
                                 ).show()
+                                val intent = Intent(this, MainActivity::class.java)
+                                startActivity(intent)
+                                finish()
                             } else {
                                 // If sign in fails, display a message to the user.
                                 Log.w(TAG, "createUserWithEmail:failure", task.exception)
@@ -81,11 +84,11 @@ class RegisterActivity : AppCompatActivity() {
 //                .apply()
 //
 //            Toast.makeText(this, "Регистрация успешна", Toast.LENGTH_SHORT).show()
-
-            // Переход на LoginActivity
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
-            finish()
+//
+//            // Переход на LoginActivity
+//            val intent = Intent(this, LoginActivity::class.java)
+//            startActivity(intent)
+//            finish()
         }
     }
 }
