@@ -38,6 +38,14 @@
             android:exported="true"
             android:label="Регистрация"
             android:theme="@style/Theme.KR" />
+
+        <!-- BookingActivity -->
+        <activity
+            android:name=".BookingActivity"
+            android:exported="true"
+            android:label="Бронирование"
+            android:theme="@style/Theme.KR" />
+
     </application>
 
 </manifest>
