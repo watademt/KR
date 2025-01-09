@@ -5,23 +5,56 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import java.util.*
+import java.util.Calendar
 
 class BookingActivity : AppCompatActivity() {
+
+    private lateinit var hotelImage: ImageView
+    private lateinit var hotelName: TextView
+    private lateinit var hotelDescription: TextView
+    private lateinit var hotelPrice: TextView
+    private lateinit var hotelLocation: TextView
+
+    // Добавляем переменные для кнопок и спиннеров
+    private lateinit var btnSelectStartDate: Button
+    private lateinit var btnSelectEndDate: Button
+    private lateinit var spinnerRoomType: Spinner
+    private lateinit var spinnerBedType: Spinner
+    private lateinit var btnConfirmBooking: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_booking)
 
-        // Получение элементов из макета
-        val btnSelectStartDate = findViewById<Button>(R.id.btnSelectStartDate)
-        val btnSelectEndDate = findViewById<Button>(R.id.btnSelectEndDate)
-        val spinnerRoomType = findViewById<Spinner>(R.id.spinnerRoomType)
-        val etNumberOfBeds = findViewById<EditText>(R.id.etNumberOfBeds)
-        val spinnerBedType = findViewById<Spinner>(R.id.spinnerBedType)
-        val btnConfirmBooking = findViewById<Button>(R.id.btnConfirmBooking)
+        // Инициализация элементов макета
+        hotelImage = findViewById(R.id.hotelImage)
+        hotelName = findViewById(R.id.hotelName)
+        hotelDescription = findViewById(R.id.hotelDescription)
+        hotelPrice = findViewById(R.id.hotelPrice)
+        hotelLocation = findViewById(R.id.hotelLocation)
 
-        // Установка слушателей для выбора дат
+        // Инициализация кнопок и спиннеров
+        btnSelectStartDate = findViewById(R.id.btnSelectStartDate)
+        btnSelectEndDate = findViewById(R.id.btnSelectEndDate)
+        spinnerRoomType = findViewById(R.id.spinnerRoomType)
+        spinnerBedType = findViewById(R.id.spinnerBedType)
+        btnConfirmBooking = findViewById(R.id.btnConfirmBooking)
+
+        // Получение данных об отеле из Intent
+        val hotelNameText = intent.getStringExtra("hotel_name")
+        val hotelDescriptionText = intent.getStringExtra("hotel_description")
+        val hotelPriceText = intent.getStringExtra("hotel_price")
+        val hotelImageRes = intent.getIntExtra("hotel_image", 0)
+        val hotelLocationText = intent.getStringExtra("hotel_location")
+
+        // Установка данных в элементы макета
+        hotelName.text = hotelNameText
+        hotelDescription.text = hotelDescriptionText
+        hotelPrice.text = hotelPriceText
+        hotelImage.setImageResource(hotelImageRes)
+        hotelLocation.text = hotelLocationText
+
+        // Настройка выбора дат
         btnSelectStartDate.setOnClickListener {
             showDatePicker { date -> btnSelectStartDate.text = date }
         }
@@ -42,10 +75,10 @@ class BookingActivity : AppCompatActivity() {
             listOf("Односпальная", "Двуспальная", "Кинг-сайз")
         )
 
-        // Обработка нажатия на кнопку "Подтвердить бронирование"
+        // Подтверждение бронирования
         btnConfirmBooking.setOnClickListener {
             val roomType = spinnerRoomType.selectedItem.toString()
-            val numberOfBeds = etNumberOfBeds.text.toString()
+            val numberOfBeds = findViewById<EditText>(R.id.etNumberOfBeds).text.toString()
             val bedType = spinnerBedType.selectedItem.toString()
 
             if (btnSelectStartDate.text == "Выберите дату заезда" ||
@@ -54,18 +87,14 @@ class BookingActivity : AppCompatActivity() {
             ) {
                 Toast.makeText(this, "Заполните все поля!", Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(
-                    this,
-                    "Бронирование подтверждено:\n$roomType, $numberOfBeds кровати, $bedType\nДаты: ${btnSelectStartDate.text} - ${btnSelectEndDate.text}",
-                    Toast.LENGTH_LONG
-                ).show()
+                Toast.makeText(this, "Бронирование подтверждено!", Toast.LENGTH_SHORT).show()
 
-                // Переход на MainActivity с флагом для загрузки SearchFragment
+                // Переход на MainActivity с флагом для загрузки FragmentSearch
                 val intent = Intent(this, MainActivity::class.java)
                 intent.putExtra("open_fragment", "search")
                 startActivity(intent)
 
-                // Завершение BookingActivity
+                // Завершаем BookingActivity
                 finish()
             }
         }
@@ -80,6 +109,7 @@ class BookingActivity : AppCompatActivity() {
 
         val datePickerDialog = DatePickerDialog(
             this,
+            R.style.CustomDatePicker, // Используем кастомный стиль
             { _, selectedYear, selectedMonth, selectedDay ->
                 val date = "$selectedDay/${selectedMonth + 1}/$selectedYear"
                 onDateSelected(date)
@@ -88,4 +118,5 @@ class BookingActivity : AppCompatActivity() {
         )
         datePickerDialog.show()
     }
+
 }

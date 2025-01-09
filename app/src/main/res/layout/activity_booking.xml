@@ -6,33 +6,97 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:orientation="vertical">
 
-        <!-- Выбор дат -->
+        <!-- Изображение отеля -->
+        <ImageView
+            android:id="@+id/hotelImage"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:layout_margin="16dp" />
+
+        <!-- Название отеля -->
+        <TextView
+            android:id="@+id/hotelName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="16dp"
+            android:textColor="@color/button" />
+
+        <!-- Расположение отеля -->
+        <TextView
+            android:id="@+id/hotelLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:paddingStart="16dp"
+            android:paddingTop="4dp"
+            android:paddingEnd="16dp"
+            android:textColor="#6D6D6D" />
+
+        <!-- Описание отеля -->
+        <TextView
+            android:id="@+id/hotelDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:lineSpacingExtra="4dp"
+            android:paddingStart="16dp"
+            android:paddingTop="16dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="16dp"
+            android:textColor="@color/button"
+            android:textStyle="italic"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:textAlignment="viewStart"
+            android:text="Описание"
+            android:includeFontPadding="true" />
+
+        <!-- Цена отеля -->
+        <TextView
+            android:id="@+id/hotelPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="8dp"
+            android:textColor="@color/button"/>
+
+        <!-- Остальная часть макета: выбор дат, спиннеры, кнопки -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Выберите даты"
+            android:text="Забронировать"
             android:textSize="16sp"
-            android:paddingBottom="8dp" />
+            android:paddingStart="16dp"
+            android:paddingTop="16dp"
+            android:paddingEnd="16dp"
+            android:textColor="@color/button" />
 
         <Button
             android:id="@+id/btnSelectStartDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Выберите дату заезда"
+            android:layout_marginHorizontal="16dp"
             android:backgroundTint="@color/button"
-            android:textColor="@android:color/white"/>
+            android:textColor="@android:color/white" />
 
         <Button
             android:id="@+id/btnSelectEndDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Выберите дату выезда"
-            android:layout_marginTop="8dp"
+            android:layout_margin="16dp"
             android:backgroundTint="@color/button"
-            android:textColor="@android:color/white"/>
+            android:textColor="@android:color/white" />
 
         <!-- Тип номера -->
         <TextView
@@ -40,12 +104,16 @@
             android:layout_height="wrap_content"
             android:text="Тип номера"
             android:textSize="16sp"
-            android:paddingTop="16dp" />
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="16dp"
+            android:textColor="@color/button" />
 
         <Spinner
             android:id="@+id/spinnerRoomType"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp" />
 
         <!-- Количество и тип кроватей -->
         <TextView
@@ -53,26 +121,34 @@
             android:layout_height="wrap_content"
             android:text="Количество кроватей"
             android:textSize="16sp"
-            android:paddingTop="16dp" />
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="16dp"
+            android:textColor="@color/button" />
 
         <EditText
             android:id="@+id/etNumberOfBeds"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Введите количество кроватей"
-            android:inputType="number" />
+            android:inputType="number"
+            android:layout_marginHorizontal="16dp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Тип кроватей"
             android:textSize="16sp"
-            android:paddingTop="16dp" />
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="16dp"
+            android:textColor="@color/button" />
 
         <Spinner
             android:id="@+id/spinnerBedType"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp" />
 
         <!-- Кнопка подтверждения -->
         <Button
@@ -80,8 +156,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Подтвердить бронирование"
-            android:layout_marginTop="24dp"
+            android:layout_margin="16dp"
             android:backgroundTint="@color/button"
-            android:textColor="@android:color/white"/>
+            android:textColor="@android:color/white" />
     </LinearLayout>
 </ScrollView>

@@ -4,5 +4,9 @@
         <item name="colorPrimary">#FDF7E3</item>
         <item name="colorPrimaryDark">@color/button</item>
         <item name="colorAccent">@color/white</item>
+        <!-- Фон диалога -->
+        <item name="android:windowBackground">#FBF8EB</item>
+        <!-- Цвет текста заголовка -->
+        <item name="android:textColorPrimary">#000000</item>
     </style>
 </resources>

@@ -21,21 +21,17 @@ class MainActivity : AppCompatActivity() {
             return
         }
 
-        val openFragment = intent.getStringExtra("open_fragment")
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
 
-        // Проверяем, нужно ли открыть конкретный фрагмент
-        if (openFragment == "search") {
+        // Устанавливаем стартовый фрагмент "Поиск"
+        if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, SearchFragment())
                 .commit()
-        } else if (savedInstanceState == null) {
-            // Установить стартовый фрагмент
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, SearchFragment())
-                .commit()
+            // Устанавливаем выбранную вкладку на "Поиск"
+            bottomNavigationView.selectedItemId = R.id.nav_search
         }
 
-        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.nav_search -> {
@@ -60,5 +56,5 @@ class MainActivity : AppCompatActivity() {
             .replace(R.id.fragment_container, fragment)
             .commit()
     }
-
 }
+
