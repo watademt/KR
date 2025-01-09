@@ -21,7 +21,7 @@ class RegisterActivity : AppCompatActivity() {
         val confirmPasswordEditText = findViewById<EditText>(R.id.etConfirmPassword)
         val registerButton = findViewById<Button>(R.id.btnRegister)
         val auth = Firebase.auth
-
+// Регистрация
         registerButton.setOnClickListener {
 
             val email = usernameEditText.text.toString()

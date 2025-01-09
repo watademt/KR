@@ -23,13 +23,17 @@ class LoginActivity : AppCompatActivity() {
         val registerTextView = findViewById<TextView>(R.id.tvRegister)
         val auth = Firebase.auth
         val currentUser = auth.currentUser
-
+// Проверка на авторизованного юзера
         if (currentUser != null) {
+            Toast.makeText(
+                baseContext,
+                "Authentication success.",
+                Toast.LENGTH_SHORT,
+            ).show()
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
-            Log.d(TAG, "signInWithEmail: was success")
         }
-
+// Авторизация
         loginButton.setOnClickListener {
 
             val email = usernameEditText.text.toString()
