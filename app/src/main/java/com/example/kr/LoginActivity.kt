@@ -1,12 +1,16 @@
 package com.example.kr
 
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
 
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,11 +21,38 @@ class LoginActivity : AppCompatActivity() {
         val passwordEditText = findViewById<EditText>(R.id.etPassword)
         val loginButton = findViewById<Button>(R.id.btnLogin)
         val registerTextView = findViewById<TextView>(R.id.tvRegister)
+        val auth = Firebase.auth
+        val currentUser = auth.currentUser
+
+        if (currentUser != null) {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            Log.d(TAG, "signInWithEmail: was success")
+        }
 
         loginButton.setOnClickListener {
-// Так называемая старая авторизация
-//            val username = usernameEditText.text.toString()
-//            val password = passwordEditText.text.toString()
+
+            val email = usernameEditText.text.toString()
+            val password = passwordEditText.text.toString()
+            auth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this) { task ->
+                    if (task.isSuccessful) {
+                        // Sign in success, update UI with the signed-in user's information
+                        Log.d(TAG, "signInWithEmail:success")
+                        val intent = Intent(this, MainActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        Log.w(TAG, "signInWithEmail:failure", task.exception)
+                        Toast.makeText(
+                            baseContext,
+                            "Authentication failed.",
+                            Toast.LENGTH_SHORT,
+                        ).show()
+                    }
+                }
+//            Старая авторизация
 //
 //            val sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE)
 //            sharedPreferences.edit().putString("logged_in_username", username).apply()
