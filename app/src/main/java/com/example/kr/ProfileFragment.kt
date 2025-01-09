@@ -30,11 +30,6 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             Toast.makeText(requireContext(), "Ваши отзывы", Toast.LENGTH_SHORT).show()
         }
 
-        // Кнопка "Связаться с нами"
-        view.findViewById<View>(R.id.btnContactUs).setOnClickListener {
-            Toast.makeText(requireContext(), "Связаться с нами", Toast.LENGTH_SHORT).show()
-        }
-
         // Кнопка "Выход из аккаунта"
         view.findViewById<View>(R.id.btnLogout).setOnClickListener {
             // Очистка SharedPreferences
