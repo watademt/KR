@@ -19,25 +19,26 @@ class LoginActivity : AppCompatActivity() {
         val registerTextView = findViewById<TextView>(R.id.tvRegister)
 
         loginButton.setOnClickListener {
-            val username = usernameEditText.text.toString()
-            val password = passwordEditText.text.toString()
-
-            val sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE)
-            sharedPreferences.edit().putString("logged_in_username", username).apply()
-            val registeredUsername = sharedPreferences.getString("registered_username", "")
-            val registeredPassword = sharedPreferences.getString("registered_password", "")
-
-            if (username == registeredUsername && password == registeredPassword) {
-                // Сохранение статуса авторизации
-                sharedPreferences.edit().putBoolean("is_logged_in", true).apply()
-
-                // Переход в MainActivity
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-                finish()
-            } else {
-                Toast.makeText(this, "Неверный логин или пароль", Toast.LENGTH_SHORT).show()
-            }
+// Так называемая старая авторизация
+//            val username = usernameEditText.text.toString()
+//            val password = passwordEditText.text.toString()
+//
+//            val sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE)
+//            sharedPreferences.edit().putString("logged_in_username", username).apply()
+//            val registeredUsername = sharedPreferences.getString("registered_username", "")
+//            val registeredPassword = sharedPreferences.getString("registered_password", "")
+//
+//            if (username == registeredUsername && password == registeredPassword) {
+//                // Сохранение статуса авторизации
+//                sharedPreferences.edit().putBoolean("is_logged_in", true).apply()
+//
+//                // Переход в MainActivity
+//                val intent = Intent(this, MainActivity::class.java)
+//                startActivity(intent)
+//                finish()
+//            } else {
+//                Toast.makeText(this, "Неверный логин или пароль", Toast.LENGTH_SHORT).show()
+//            }
         }
 
         // Переход на экран регистрации
