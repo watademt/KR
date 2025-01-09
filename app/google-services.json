@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "891884726844",
+    "project_id": "travelagency-4d701",
+    "storage_bucket": "travelagency-4d701.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:891884726844:android:858a28eb9818f35cc13139",
+        "android_client_info": {
+          "package_name": "com.example.kr"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCACjuvlKtHw_BVsbhQwp81gPmkNkbqQcg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
