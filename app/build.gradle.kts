@@ -51,7 +51,6 @@ android {
 
 dependencies {
     implementation (libs.firebase.firestore)
-    implementation ("com.google.android.material:material:1.9.0")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)

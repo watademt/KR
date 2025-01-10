@@ -109,7 +109,7 @@ class BookingActivity : AppCompatActivity() {
 
         val datePickerDialog = DatePickerDialog(
             this,
-            R.style.CustomDatePicker, // Используем кастомный стиль
+            R.style.CustomDatePicker, // Указываем вашу тему
             { _, selectedYear, selectedMonth, selectedDay ->
                 val date = "$selectedDay/${selectedMonth + 1}/$selectedYear"
                 onDateSelected(date)
@@ -118,5 +118,6 @@ class BookingActivity : AppCompatActivity() {
         )
         datePickerDialog.show()
     }
+
 
 }

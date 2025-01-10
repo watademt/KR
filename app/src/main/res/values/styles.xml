@@ -1,10 +1,17 @@
 <resources>
-    <style name="CustomDatePicker" parent="Theme.MaterialComponents.Light.Dialog">
+    <style name="CustomDatePicker" parent="Theme.AppCompat.Light.Dialog">
         <!-- Фон диалога -->
-        <item name="android:windowBackground">#FBF8EB</item>
+        <item name="android:background">#FBF8EB</item>
+        <!-- Цвет кнопок -->
+        <item name="colorAccent">#4E3D33</item>
         <!-- Цвет текста заголовка -->
         <item name="android:textColorPrimary">#4E3D33</item>
-        <!-- Цвет текста чисел и дней недели -->
+        <!-- Цвет текста дней недели и чисел -->
         <item name="android:textColor">#4E3D33</item>
+        <!-- Цвет текста выделенной даты -->
+        <item name="android:textColorHighlight">#FFFFFF</item>
+        <!-- Цвет выделенного фона -->
+        <item name="android:colorAccent">#4E3D33</item>
     </style>
+
 </resources>
