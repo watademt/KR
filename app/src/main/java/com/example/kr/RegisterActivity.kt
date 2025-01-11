@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.kr.data.MainScreenDataObject
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 
@@ -40,6 +41,10 @@ class RegisterActivity : AppCompatActivity() {
                                     "Authentication Successful.",
                                     Toast.LENGTH_SHORT,
                                 ).show()
+                                MainScreenDataObject(
+                                    task.result.user?.uid!!,
+                                    task.result.user?.email!!
+                                )
                                 val intent = Intent(this, MainActivity::class.java)
                                 startActivity(intent)
                                 finish()

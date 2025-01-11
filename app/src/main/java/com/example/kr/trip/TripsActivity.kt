@@ -1,4 +1,4 @@
-package com.example.kr.Trip
+package com.example.kr.trip
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

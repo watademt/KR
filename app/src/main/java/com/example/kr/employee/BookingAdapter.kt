@@ -1,4 +1,4 @@
-package com.example.kr.Employee
+package com.example.kr.employee
 
 import android.content.Context
 import android.content.Intent
@@ -9,7 +9,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.kr.Booking.Booking
+import com.example.kr.booking.Booking
 import com.example.kr.R
 
 //Передача данных для карточек

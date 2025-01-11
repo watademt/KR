@@ -1,6 +1,6 @@
-package com.example.kr.Hotel
+package com.example.kr.data
 
-data class Hotel(
+data class Hotels(
     val name: String,
     val description: String,
     val price: String,

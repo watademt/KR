@@ -1,4 +1,4 @@
-package com.example.kr.Hotel
+package com.example.kr.hotel
 
 import android.content.Context
 import android.content.Intent
@@ -9,7 +9,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.kr.Booking.BookingActivity
+import com.example.kr.booking.BookingActivity
 import com.example.kr.R
 
 //Передача данных для карточки
@@ -19,6 +19,7 @@ class HotelAdapter(private val hotels: List<Hotel>) : RecyclerView.Adapter<Hotel
         val image: ImageView = view.findViewById(R.id.hotel_image)
         val name: TextView = view.findViewById(R.id.hotel_name)
         val description: TextView = view.findViewById(R.id.hotel_description)
+        val features: TextView = view.findViewById(R.id.hotel_features)
         val price: TextView = view.findViewById(R.id.hotel_price)
         val bookButton: Button = view.findViewById(R.id.hotel_book_button)
     }
@@ -33,6 +34,7 @@ class HotelAdapter(private val hotels: List<Hotel>) : RecyclerView.Adapter<Hotel
         val hotel = hotels[position]
         holder.name.text = hotel.name
         holder.description.text = hotel.description
+        holder.features.text = hotel.location
         holder.price.text = hotel.price
         holder.image.setImageResource(hotel.imageResource)
 

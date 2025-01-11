@@ -1,12 +1,14 @@
-package com.example.kr.Profile
+package com.example.kr.profile
 
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.kr.LoginActivity
 import com.example.kr.R
+import com.example.kr.data.MainScreenDataObject
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 
@@ -14,14 +16,15 @@ import com.google.firebase.auth.auth
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val navData = MainScreenDataObject
 // Не нужно пока что
-//        // Получение имени пользователя из SharedPreferences
+        // Получение имени пользователя из SharedPreferences
 //        val sharedPreferences = requireActivity().getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
 //        val username = sharedPreferences.getString("logged_in_username", "Гость")
-//
-//        // Отображение имени пользователя
-//        val userNameTextView = view.findViewById<TextView>(R.id.tvUserName)
-//        userNameTextView.text = username
+
+        // Отображение имени пользователя
+        val userNameTextView = view.findViewById<TextView>(R.id.tvUserName)
+        userNameTextView.text = navData.toString()
 //
         // Кнопка "Управление аккаунтом"
         view.findViewById<View>(R.id.btnAccountManagement).setOnClickListener {

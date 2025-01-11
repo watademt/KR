@@ -1,6 +1,5 @@
-package com.example.kr.Trip
+package com.example.kr.trip
 
-import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -15,9 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kr.R
 
-//Прошедшие поездки
-class PastTripsFragment : Fragment() {
-    @SuppressLint("MissingInflatedId")
+//Активные поездки, ставления отзыва и повторное бронирование
+class ActiveTripsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -27,7 +25,7 @@ class PastTripsFragment : Fragment() {
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = TripsAdapter(
-            trips = getPastTrips(),
+            trips = getActiveTrips(),
             onLeaveReview = { trip ->
                 val dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_review, null)
                 val dialog = AlertDialog.Builder(context)
@@ -65,10 +63,10 @@ class PastTripsFragment : Fragment() {
         return view
     }
 
-    private fun getPastTrips(): List<Trip> {
+    private fun getActiveTrips(): List<Trip> {
         return listOf(
-            Trip("Грейс Аква Вилла 4*", "Абхазия, Сухум", "24 - 31 июля 2023 г.", "10 349 руб."),
-            Trip("Rios Beach (Intersport com.example.kr.Hotel.Hotel) 4*", "Турция, Кемер", "29 - 5 июля 2022 г.", "120 389 руб.")
+            Trip("Активный Отель 1", "Москва, Россия", "10 - 15 мая 2023 г.", "15 000 руб."),
+            Trip("Активный Отель 2", "Санкт-Петербург, Россия", "20 - 25 июня 2023 г.", "20 000 руб.")
         )
     }
 }
