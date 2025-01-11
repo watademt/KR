@@ -9,6 +9,7 @@ data class Booking(
     val price: String,
     val roomType: String,
     val bedDetails: String,
-    val hotelImageRes: Int
+    val hotelImageRes: Int,
+    var status: String
 )
 

@@ -11,7 +11,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 class BookingAdapter(
-    private val bookings: List<Booking>
+    private var bookings: MutableList<Booking>,
+    private val onBookingAction: (String, String) -> Unit // Callback с ID и новым статусом
 ) : RecyclerView.Adapter<BookingAdapter.BookingViewHolder>() {
 
     class BookingViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -55,4 +56,11 @@ class BookingAdapter(
     }
 
     override fun getItemCount() = bookings.size
+
+    fun updateBookings(newBookings: List<Booking>) {
+        bookings.clear()
+        bookings.addAll(newBookings)
+        notifyDataSetChanged()
+    }
 }
+

@@ -1,5 +1,6 @@
 package com.example.kr
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
@@ -21,31 +22,23 @@ class BookingDetailsActivity : AppCompatActivity() {
         val btnConfirmBooking = findViewById<Button>(R.id.btnConfirmBooking)
         val btnCancelBooking = findViewById<Button>(R.id.btnCancelBooking)
 
-        // Получение данных из Intent
-        val hotelNameText = intent.getStringExtra("hotel_name")
-        val startDate = intent.getStringExtra("start_date")
-        val endDate = intent.getStringExtra("end_date")
-        val price = intent.getStringExtra("price")
-        val roomTypeText = intent.getStringExtra("room_type")
-        val bedDetailsText = intent.getStringExtra("bed_details")
-        val hotelImageRes = intent.getIntExtra("hotel_image", 0)
+        val bookingId = intent.getStringExtra("booking_id")
 
-        // Установка данных
-        hotelName.text = hotelNameText
-        bookingDates.text = "$startDate - $endDate"
-        roomType.text = "Тип комнаты: $roomTypeText"
-        bedDetails.text = bedDetailsText
-        hotelImage.setImageResource(hotelImageRes)
-
-        // Обработка кнопок
         btnConfirmBooking.setOnClickListener {
-            Toast.makeText(this, "Бронирование подтверждено!", Toast.LENGTH_SHORT).show()
+            setResult(RESULT_OK, Intent().apply {
+                putExtra("booking_action", "confirmed")
+                putExtra("booking_id", bookingId)
+            })
             finish()
         }
 
         btnCancelBooking.setOnClickListener {
-            Toast.makeText(this, "Бронирование отменено!", Toast.LENGTH_SHORT).show()
+            setResult(RESULT_OK, Intent().apply {
+                putExtra("booking_action", "cancelled")
+                putExtra("booking_id", bookingId)
+            })
             finish()
         }
     }
 }
+
