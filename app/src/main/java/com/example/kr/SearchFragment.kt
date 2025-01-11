@@ -1,7 +1,6 @@
 package com.example.kr
 
 import Hotel
-import HotelAdapter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -23,9 +22,27 @@ class SearchFragment : Fragment() {
 
         // Список отелей
         val hotels = listOf(
-            Hotel("Rios Beach", "Отель для экономного отдыха", "167 225 руб.", R.drawable.hotel_image),
-            Hotel("Club Hotel Anjeliq", "Отель с бассейнами и горками", "198 285 руб.", R.drawable.hotel_image),
-            Hotel("Грейс Аква Вилла", "Отель с первой линией на берегу", "160 417 руб.", R.drawable.hotel_image)
+            Hotel(
+                "Rios Beach",
+                "Небольшой отель для экономичного отдыха расположен в Бельдиби, в шаговой доступности от собственного пляжа. На территории — один отельный корпус, открытый бассейн, теннисный корт. Прогулка до центра поселка займет 15-20 минут.",
+                "167 225 руб.",
+                R.drawable.hotel_image,
+                "Бельдиби, Турция"
+            ),
+            Hotel(
+                "Club Hotel Anjeliq",
+                "Отель с бассейнами и горками",
+                "198 285 руб.",
+                R.drawable.hotel_image,
+                "Алания, Турция"
+            ),
+            Hotel(
+                "Грейс Аква Вилла",
+                "Отель с первой линией на берегу",
+                "160 417 руб.",
+                R.drawable.hotel_image,
+                "Сочи, Россия"
+            )
         )
 
         // Настройка RecyclerView

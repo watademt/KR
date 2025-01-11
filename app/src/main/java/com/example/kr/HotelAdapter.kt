@@ -1,3 +1,7 @@
+package com.example.kr
+
+import Hotel
+import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
@@ -6,8 +10,6 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.kr.BookingActivity
-import com.example.kr.R
 
 class HotelAdapter(private val hotels: List<Hotel>) : RecyclerView.Adapter<HotelAdapter.HotelViewHolder>() {
 
@@ -33,12 +35,20 @@ class HotelAdapter(private val hotels: List<Hotel>) : RecyclerView.Adapter<Hotel
         holder.image.setImageResource(hotel.imageResource)
 
         holder.bookButton.setOnClickListener {
-            val context = holder.itemView.context
-            val intent = Intent(context, BookingActivity::class.java)
+            val context: Context = holder.itemView.context
+
+            // Передача данных в BookingActivity
+            val intent = Intent(context, BookingActivity::class.java).apply {
+                putExtra("hotel_name", hotel.name)
+                putExtra("hotel_description", hotel.description)
+                putExtra("hotel_price", hotel.price)
+                putExtra("hotel_image", hotel.imageResource)
+                putExtra("hotel_location", hotel.location)
+            }
+
             context.startActivity(intent)
         }
     }
-
 
     override fun getItemCount() = hotels.size
 }
