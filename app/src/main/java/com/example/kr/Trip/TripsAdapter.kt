@@ -1,13 +1,14 @@
+package com.example.kr.Trip
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kr.R
-import com.example.kr.Trip
 
+//Обработка кнопок и переключения вкладкок
 class TripsAdapter(
     private val trips: List<Trip>,
     private val onLeaveReview: (Trip) -> Unit,
@@ -32,7 +33,7 @@ class TripsAdapter(
         val trip = trips[position]
         holder.tripName.text = trip.name
         holder.tripDetails.text = "${trip.location}\n${trip.dates}\n${trip.price}"
-        holder.tripImage.setImageResource(R.drawable.hotel_image) // Замените на реальное изображение
+        holder.tripImage.setImageResource(R.drawable.hotel_image)
 
         // Обработка клика на "Оставить отзыв"
         holder.leaveReview.setOnClickListener {

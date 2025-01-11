@@ -1,13 +1,14 @@
-package com.example.kr
+package com.example.kr.Employee
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.kr.R
 
+//Передача данных для подробной инфы об турах
 class BookingDetailsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

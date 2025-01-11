@@ -3,6 +3,9 @@ package com.example.kr
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.example.kr.Hotel.SearchFragment
+import com.example.kr.Profile.ProfileFragment
+import com.example.kr.Trip.TripsFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {

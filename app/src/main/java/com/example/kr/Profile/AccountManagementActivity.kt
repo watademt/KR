@@ -1,4 +1,4 @@
-package com.example.kr
+package com.example.kr.Profile
 
 import android.app.DatePickerDialog
 import android.content.Intent
@@ -7,8 +7,10 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.example.kr.R
 import java.util.*
 
+//Изменения аккаунта
 class AccountManagementActivity : AppCompatActivity() {
 
     private lateinit var ivProfileAvatar: ImageView

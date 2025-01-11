@@ -1,3 +1,5 @@
+package com.example.kr.Hotel
+
 data class Hotel(
     val name: String,
     val description: String,

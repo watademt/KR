@@ -1,4 +1,4 @@
-package com.example.kr
+package com.example.kr.Booking
 
 data class Booking(
     val id: String,

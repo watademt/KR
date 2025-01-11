@@ -1,12 +1,15 @@
-package com.example.kr
+package com.example.kr.Booking
 
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.example.kr.MainActivity
+import com.example.kr.R
 import java.util.Calendar
 
+//Обработка кнопок
 class BookingActivity : AppCompatActivity() {
 
     private lateinit var hotelImage: ImageView

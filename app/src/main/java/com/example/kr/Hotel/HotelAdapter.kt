@@ -1,6 +1,5 @@
-package com.example.kr
+package com.example.kr.Hotel
 
-import Hotel
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
@@ -10,7 +9,10 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.kr.Booking.BookingActivity
+import com.example.kr.R
 
+//Передача данных для карточки
 class HotelAdapter(private val hotels: List<Hotel>) : RecyclerView.Adapter<HotelAdapter.HotelViewHolder>() {
 
     class HotelViewHolder(view: View) : RecyclerView.ViewHolder(view) {

@@ -1,4 +1,4 @@
-package com.example.kr
+package com.example.kr.Trip
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity

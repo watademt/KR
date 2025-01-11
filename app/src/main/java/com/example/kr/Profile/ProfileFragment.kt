@@ -1,13 +1,16 @@
-package com.example.kr
+package com.example.kr.Profile
 
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.example.kr.LoginActivity
+import com.example.kr.R
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 
+//Профиль пользователя
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -20,11 +23,12 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 //        val userNameTextView = view.findViewById<TextView>(R.id.tvUserName)
 //        userNameTextView.text = username
 //
-//        // Кнопка "Управление аккаунтом"
-//        view.findViewById<View>(R.id.btnAccountManagement).setOnClickListener {
-//            Toast.makeText(requireContext(), "Управление аккаунтом", Toast.LENGTH_SHORT).show()
-//        }
-//
+        // Кнопка "Управление аккаунтом"
+        view.findViewById<View>(R.id.btnAccountManagement).setOnClickListener {
+            // Переход на экран управления аккаунтом
+            val intent = Intent(requireContext(), AccountManagementActivity::class.java)
+            startActivity(intent)
+        }
 //        // Кнопка "Ваши отзывы"
 //        view.findViewById<View>(R.id.btnUserReviews).setOnClickListener {
 //            Toast.makeText(requireContext(), "Ваши отзывы", Toast.LENGTH_SHORT).show()

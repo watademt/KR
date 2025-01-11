@@ -1,4 +1,4 @@
-package com.example.kr
+package com.example.kr.Employee
 
 import android.content.Context
 import android.content.Intent
@@ -9,7 +9,10 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.kr.Booking.Booking
+import com.example.kr.R
 
+//Передача данных для карточек
 class BookingAdapter(
     private var bookings: MutableList<Booking>,
     private val onBookingAction: (String, String) -> Unit // Callback с ID и новым статусом

@@ -1,6 +1,5 @@
-package com.example.kr
+package com.example.kr.Hotel
 
-import Hotel
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.kr.R
 
+//Фрагмент поиска в панели навигации
 class SearchFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,7 +31,7 @@ class SearchFragment : Fragment() {
                 "Бельдиби, Турция"
             ),
             Hotel(
-                "Club Hotel Anjeliq",
+                "Club com.example.kr.Hotel.Hotel Anjeliq",
                 "Отель с бассейнами и горками",
                 "198 285 руб.",
                 R.drawable.hotel_image,

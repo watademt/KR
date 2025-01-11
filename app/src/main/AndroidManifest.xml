@@ -41,12 +41,20 @@
 
         <!-- BookingActivity -->
         <activity
-            android:name=".BookingActivity"
+            android:name=".Booking.BookingActivity"
             android:exported="true"
             android:label="Бронирование"
             android:theme="@style/Theme.KR" />
 
+        <!-- AccountManagementActivity -->
+        <activity
+            android:name=".Profile.AccountManagementActivity"
+            android:exported="true"
+            android:label="Управление аккаунтом"
+            android:theme="@style/Theme.KR" />
+
     </application>
+
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="32"
         tools:ignore="ManifestOrder" />

@@ -1,10 +1,13 @@
-package com.example.kr
+package com.example.kr.Employee
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.kr.Booking.Booking
+import com.example.kr.R
 
+//Обработка нажатия кнопок на странице сотрудника
 class EmployeeActivity : AppCompatActivity() {
 
     private lateinit var adapter: BookingAdapter
@@ -32,7 +35,7 @@ class EmployeeActivity : AppCompatActivity() {
             ),
             Booking(
                 id = "2",
-                hotelName = "Club Hotel Anjeliq",
+                hotelName = "Club com.example.kr.Hotel.Hotel Anjeliq",
                 userName = "Петров Петр",
                 startDate = "12.01.2025",
                 endDate = "18.01.2025",
