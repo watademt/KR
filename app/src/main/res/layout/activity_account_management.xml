@@ -1,0 +1,93 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="16dp"
+    android:background="#FFF9E5">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <!-- Заголовок -->
+        <TextView
+            android:id="@+id/tvProfileTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Управление аккаунтом"
+            android:textSize="20sp"
+            android:layout_marginBottom="16dp"
+            android:textColor="@color/button" />
+
+        <!-- Аватар -->
+        <ImageView
+            android:id="@+id/ivProfileAvatar"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:src="@drawable/ic_user_avatar"
+            app:tint="@color/button"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/bg_edittext"
+            android:padding="4dp" />
+
+        <Button
+            android:id="@+id/btnChangeAvatar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Изменить фото"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/button"
+            android:textColor="@android:color/white" />
+
+        <!-- Имя пользователя -->
+        <EditText
+            android:id="@+id/etUserName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Имя пользователя"
+            android:inputType="textPersonName"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/edittext_border" />
+
+        <!-- Дата рождения -->
+        <EditText
+            android:id="@+id/etDateOfBirth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Дата рождения"
+            android:inputType="date"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/edittext_border" />
+
+        <!-- Телефон -->
+        <EditText
+            android:id="@+id/etPhoneNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Телефон"
+            android:inputType="phone"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/edittext_border" />
+
+        <!-- Пароль -->
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Пароль"
+            android:inputType="textPassword"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/edittext_border" />
+
+        <!-- Кнопка сохранить изменения -->
+        <Button
+            android:id="@+id/btnSaveChanges"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Сохранить изменения"
+            android:backgroundTint="@color/button"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+</ScrollView>

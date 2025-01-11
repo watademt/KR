@@ -47,5 +47,8 @@
             android:theme="@style/Theme.KR" />
 
     </application>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32"
+        tools:ignore="ManifestOrder" />
 
 </manifest>
