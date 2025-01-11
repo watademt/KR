@@ -1,0 +1,86 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF9E5">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Изображение отеля -->
+        <ImageView
+            android:id="@+id/hotelImage"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Название отеля -->
+        <TextView
+            android:id="@+id/tvHotelNameDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Rios Beach"
+            android:textSize="20sp"
+            android:layout_marginBottom="8dp"
+            android:textColor="@color/button" />
+
+        <!-- Даты бронирования -->
+        <TextView
+            android:id="@+id/tvBookingDatesDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="10.01.2025 - 15.01.2025"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp"
+            android:textColor="@color/button" />
+
+        <!-- Тип комнаты -->
+        <TextView
+            android:id="@+id/tvRoomTypeDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Тип комнаты: Люкс"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp"
+            android:textColor="@color/black" />
+
+        <!-- Количество и тип кроватей -->
+        <TextView
+            android:id="@+id/tvBedDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="2 кровати, Кинг-сайз"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp"
+            android:textColor="@color/black" />
+
+        <!-- Кнопки подтверждения и отмены -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="16dp">
+
+            <Button
+                android:id="@+id/btnConfirmBooking"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Подтвердить"
+                android:backgroundTint="@color/button"
+                android:textColor="@android:color/white"
+                android:layout_marginEnd="8dp" />
+
+            <Button
+                android:id="@+id/btnCancelBooking"
+                android:layout_width="133dp"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/button"
+                android:text="Отменить"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

@@ -5,7 +5,7 @@
     android:padding="8dp"
     android:layout_margin="8dp"
     android:elevation="4dp"
-    android:background="#FBF8EB">
+    android:background="#FFF9E5">
 
     <!-- Изображение отеля -->
     <ImageView
