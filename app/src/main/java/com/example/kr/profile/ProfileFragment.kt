@@ -7,7 +7,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.kr.LoginActivity
 import com.example.kr.R
-import com.example.kr.data.MainScreenDataObject
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 
