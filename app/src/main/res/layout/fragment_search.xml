@@ -11,14 +11,14 @@
         android:id="@+id/tvHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="з"
+        android:layout_marginTop="16dp"
+        android:text="Поиск"
         android:textColor="@color/button"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <!-- Поле поиска -->
     <LinearLayout
@@ -44,27 +44,8 @@
 
 
         <!-- Поле даты -->
-        <EditText
-            android:id="@+id/etDate"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginTop="8dp"
-            android:hint="Пт, 10 сент. - 15 сент."
-            android:drawableStart="@drawable/ic_calendar"
-            android:drawableTint="@color/button"
-
-            android:background="@drawable/edittext_border"/>
 
         <!-- Поле пассажиров -->
-        <EditText
-            android:id="@+id/etGuests"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginTop="8dp"
-            android:hint="1 номер, 2 взрослых"
-            android:drawableStart="@drawable/ic_profile"
-            android:drawableTint="@color/button"
-            android:background="@drawable/edittext_border"/>
 
 
         <!-- Кнопка найти -->

@@ -15,10 +15,37 @@
             android:id="@+id/etRegisterUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Имя пользователя"
+            android:hint="Электронная почта"
             android:padding="12dp"
             android:layout_marginBottom="16dp"
             android:background="@drawable/edittext_border" />
+        <EditText
+            android:id="@+id/etRegisterName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Фамилия Имя"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/edittext_border" />
+        <EditText
+            android:id="@+id/etRegisterNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Номер телефона"
+            android:inputType="number"
+            android:maxLength="11"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/edittext_border" />
+
+        <Button
+            android:id="@+id/btnSelectDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Выберите дату рождения"
+            android:layout_margin="16dp"
+            android:backgroundTint="@color/button"
+            android:textColor="@android:color/white" />
 
         <EditText
             android:id="@+id/etRegisterPassword"
