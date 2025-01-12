@@ -137,12 +137,12 @@ class BookingActivity : AppCompatActivity() {
         val userId = currentUser.uid
 
         // Получаем данные клиента из коллекции `clients`
-        firestore.collection("clients").document(userId).get()
+        firestore.collection("accounts").document(userId).get()
             .addOnSuccessListener { clientDocument ->
                 if (clientDocument.exists()) {
-                    val clientName = clientDocument.getString("ФИО") ?: "Неизвестно"
-                    val clientPhone = clientDocument.getString("Телефон") ?: "Неизвестно"
-                    val clientDOB = clientDocument.getString("Дата рождение") ?: "Неизвестно"
+                    val clientName = clientDocument.getString("name") ?: "Неизвестно"
+                    val clientPhone = clientDocument.getString("number") ?: "Неизвестно"
+                    val clientDOB = clientDocument.getString("birthday") ?: "Неизвестно"
 
                     // Вычисляем количество ночей
                     val nights = calculateDaysBetween(startDate, endDate)
