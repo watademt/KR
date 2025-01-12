@@ -15,7 +15,7 @@ import com.google.firebase.auth.auth
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val navData = MainScreenDataObject
+//             val navData = MainScreenDataObject
 // Не нужно пока что
         // Получение имени пользователя из SharedPreferences
 //        val sharedPreferences = requireActivity().getSharedPreferences("user_prefs", Context.MODE_PRIVATE)

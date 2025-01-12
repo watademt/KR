@@ -20,7 +20,7 @@ class AccountManagementActivity : AppCompatActivity() {
     private lateinit var etUserName: EditText
     private lateinit var etDateOfBirth: EditText
     private lateinit var etPhoneNumber: EditText
-    private lateinit var etPassword: EditText
+ //   private lateinit var etPassword: EditText
     private lateinit var btnSaveChanges: Button
     private lateinit var btnChangeAvatar: Button
 
@@ -35,7 +35,7 @@ class AccountManagementActivity : AppCompatActivity() {
         etUserName = findViewById(R.id.etUserName)
         etDateOfBirth = findViewById(R.id.etDateOfBirth)
         etPhoneNumber = findViewById(R.id.etPhoneNumber)
-        etPassword = findViewById(R.id.etPassword)
+//        etPassword = findViewById(R.id.etPassword)
         btnSaveChanges = findViewById(R.id.btnSaveChanges)
         btnChangeAvatar = findViewById(R.id.btnChangeAvatar)
 
@@ -49,7 +49,7 @@ class AccountManagementActivity : AppCompatActivity() {
         etUserName.setText(currentUserName)
         etDateOfBirth.setText(currentDateOfBirth)
         etPhoneNumber.setText(currentPhoneNumber)
-        etPassword.setText(currentPassword)
+ //       etPassword.setText(currentPassword)
 
         // Слушатель выбора даты
         etDateOfBirth.setOnClickListener {
@@ -86,10 +86,10 @@ class AccountManagementActivity : AppCompatActivity() {
             val newUserName = etUserName.text.toString()
             val newDateOfBirth = etDateOfBirth.text.toString()
             val newPhoneNumber = etPhoneNumber.text.toString()
-            val newPassword = etPassword.text.toString()
+//            val newPassword = etPassword.text.toString()
 
-            if (newUserName.isNotEmpty() && newDateOfBirth.isNotEmpty() &&
-                newPhoneNumber.isNotEmpty() && newPassword.isNotEmpty()
+            if (newUserName.isNotEmpty() && newDateOfBirth.isNotEmpty()
+//                && newPhoneNumber.isNotEmpty() && newPassword.isNotEmpty()
             ) {
                 // Сохранение изменений (заменить на обновление в базе данных)
                 Toast.makeText(this, "Изменения сохранены", Toast.LENGTH_SHORT).show()
@@ -107,6 +107,7 @@ class AccountManagementActivity : AppCompatActivity() {
 
         val datePickerDialog = DatePickerDialog(
             this,
+            R.style.CustomDatePicker,
             { _, selectedYear, selectedMonth, selectedDay ->
                 val date = "$selectedDay/${selectedMonth + 1}/$selectedYear"
                 onDateSelected(date)
