@@ -43,6 +43,14 @@
 
         <!-- Имя пользователя -->
         <EditText
+            android:id="@+id/etUserEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Почта"
+            android:inputType="textEmailAddress"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/edittext_border" />
+        <EditText
             android:id="@+id/etUserName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -68,6 +76,7 @@
             android:layout_height="wrap_content"
             android:hint="Телефон"
             android:inputType="phone"
+            android:maxLength="11"
             android:layout_marginBottom="16dp"
             android:background="@drawable/edittext_border" />
 

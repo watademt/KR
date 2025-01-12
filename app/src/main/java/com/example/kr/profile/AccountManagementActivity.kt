@@ -10,7 +10,11 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.kr.MainActivity
 import com.example.kr.R
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
+import com.google.firebase.firestore.FirebaseFirestore
 import java.util.Calendar
 
 //Изменения аккаунта
@@ -19,13 +23,13 @@ class AccountManagementActivity : AppCompatActivity() {
     private lateinit var ivProfileAvatar: ImageView
     private lateinit var etUserName: EditText
     private lateinit var etDateOfBirth: EditText
+    private lateinit var etUserEmail: EditText
     private lateinit var etPhoneNumber: EditText
  //   private lateinit var etPassword: EditText
     private lateinit var btnSaveChanges: Button
     private lateinit var btnChangeAvatar: Button
 
     private val PICK_IMAGE_REQUEST = 1
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_account_management)
@@ -33,6 +37,7 @@ class AccountManagementActivity : AppCompatActivity() {
         // Инициализация элементов
         ivProfileAvatar = findViewById(R.id.ivProfileAvatar)
         etUserName = findViewById(R.id.etUserName)
+        etUserEmail = findViewById(R.id.etUserEmail)
         etDateOfBirth = findViewById(R.id.etDateOfBirth)
         etPhoneNumber = findViewById(R.id.etPhoneNumber)
 //        etPassword = findViewById(R.id.etPassword)
@@ -40,15 +45,28 @@ class AccountManagementActivity : AppCompatActivity() {
         btnChangeAvatar = findViewById(R.id.btnChangeAvatar)
 
         // Получение текущих данных (заменить на данные из базы данных)
-        val currentUserName = "Иван Иванов"
-        val currentDateOfBirth = "01.01.1990"
-        val currentPhoneNumber = "+7 123 456 78 90"
-        val currentPassword = "password123"
+        val user = Firebase.auth.currentUser
+        val dbRef = FirebaseFirestore.getInstance();
+
+        dbRef.collection("accounts").document(user!!.uid).get()
+            .addOnSuccessListener { document->
+                if(document !=null && document.exists()){
+                    etUserEmail.setText(document.getString("email") ?: "")
+                    etUserName.setText(document.getString("name") ?: "")
+                    etDateOfBirth.setText(document.getString("birthday") ?: "")
+                    etPhoneNumber.setText(document.getString("number") ?: "")
+                }else{
+                    Toast.makeText(
+                        baseContext,
+                        "else",
+                        Toast.LENGTH_SHORT,
+                    ).show()
+                }
+            }
+
+
 
         // Установка текущих данных в поля
-        etUserName.setText(currentUserName)
-        etDateOfBirth.setText(currentDateOfBirth)
-        etPhoneNumber.setText(currentPhoneNumber)
  //       etPassword.setText(currentPassword)
 
         // Слушатель выбора даты
@@ -59,6 +77,30 @@ class AccountManagementActivity : AppCompatActivity() {
         // Слушатель выбора фото профиля
         btnChangeAvatar.setOnClickListener {
             openGallery()
+        }
+        // Сохранение изменений
+        btnSaveChanges.setOnClickListener {
+            val newUserName = etUserName.text.toString()
+            val newDateOfBirth = etDateOfBirth.text.toString()
+            val newPhoneNumber = etPhoneNumber.text.toString()
+            val newUserEmail = etUserEmail.text.toString()
+//            val newPassword = etPassword.text.toString()
+
+            if (newUserName.isNotEmpty() && newDateOfBirth.isNotEmpty()
+                && newPhoneNumber.isNotEmpty()
+            ) {
+                val dbRef = FirebaseFirestore.getInstance();
+                val account = com.example.kr.profile.Account(newUserEmail, newUserName, newDateOfBirth,newPhoneNumber)
+                val user = Firebase.auth.currentUser
+                dbRef.collection("accounts").document(user?.uid!!).set(account)
+                // Сохранение изменений (заменить на обновление в базе данных)
+                Toast.makeText(this, "Изменения сохранены", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "Заполните все поля", Toast.LENGTH_SHORT).show()
+            }
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 
@@ -81,22 +123,7 @@ class AccountManagementActivity : AppCompatActivity() {
             }
         }
 
-        // Сохранение изменений
-        btnSaveChanges.setOnClickListener {
-            val newUserName = etUserName.text.toString()
-            val newDateOfBirth = etDateOfBirth.text.toString()
-            val newPhoneNumber = etPhoneNumber.text.toString()
-//            val newPassword = etPassword.text.toString()
 
-            if (newUserName.isNotEmpty() && newDateOfBirth.isNotEmpty()
-//                && newPhoneNumber.isNotEmpty() && newPassword.isNotEmpty()
-            ) {
-                // Сохранение изменений (заменить на обновление в базе данных)
-                Toast.makeText(this, "Изменения сохранены", Toast.LENGTH_SHORT).show()
-            } else {
-                Toast.makeText(this, "Заполните все поля", Toast.LENGTH_SHORT).show()
-            }
-        }
     }
 
     private fun showDatePicker(onDateSelected: (String) -> Unit) {
