@@ -1,4 +1,4 @@
-package com.example.kr.Trip
+package com.example.kr.trip
 
 import android.app.AlertDialog
 import android.os.Bundle
@@ -14,8 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kr.R
 
-//Активные поездки, ставления отзыва и повторное бронирование
-class ActiveTripsFragment : Fragment() {
+//Отмененные поездки
+class CancelledTripsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -25,7 +25,7 @@ class ActiveTripsFragment : Fragment() {
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = TripsAdapter(
-            trips = getActiveTrips(),
+            trips = getCancelledTrips(),
             onLeaveReview = { trip ->
                 val dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_review, null)
                 val dialog = AlertDialog.Builder(context)
@@ -37,15 +37,23 @@ class ActiveTripsFragment : Fragment() {
                 val submitButton = dialogView.findViewById<Button>(R.id.submit_button)
                 val cancelButton = dialogView.findViewById<Button>(R.id.cancel_button)
 
+                // Обработка нажатия на кнопку "Отмена"
                 cancelButton.setOnClickListener {
                     dialog.dismiss()
                 }
 
+                // Добавление слушателя для изменений в RatingBar
+                ratingBar.setOnRatingBarChangeListener { _, newRating, _ ->
+                    Toast.makeText(context, "Вы выбрали рейтинг: $newRating", Toast.LENGTH_SHORT).show()
+                }
+
+                // Обработка нажатия на кнопку "Отправить"
                 submitButton.setOnClickListener {
                     val rating = ratingBar.rating
                     val comment = commentInput.text.toString()
+
                     if (rating > 0) {
-                        Toast.makeText(context, "Спасибо за отзыв!", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, "Спасибо за отзыв с оценкой: $rating", Toast.LENGTH_SHORT).show()
                         dialog.dismiss()
                     } else {
                         Toast.makeText(context, "Пожалуйста, поставьте оценку", Toast.LENGTH_SHORT).show()
@@ -53,8 +61,7 @@ class ActiveTripsFragment : Fragment() {
                 }
 
                 dialog.show()
-            }
-            ,
+            },
             onRepeatBooking = { trip ->
                 // Логика для повторного бронирования
                 Toast.makeText(requireContext(), "Повторить бронирование для: ${trip.name}", Toast.LENGTH_SHORT).show()
@@ -63,10 +70,10 @@ class ActiveTripsFragment : Fragment() {
         return view
     }
 
-    private fun getActiveTrips(): List<Trip> {
+    private fun getCancelledTrips(): List<Trip> {
         return listOf(
-            Trip("Активный Отель 1", "Москва, Россия", "10 - 15 мая 2023 г.", "15 000 руб."),
-            Trip("Активный Отель 2", "Санкт-Петербург, Россия", "20 - 25 июня 2023 г.", "20 000 руб.")
+            Trip("Отмененный Отель 1", "Сочи, Россия", "10 - 15 июля 2023 г.", "30 000 руб."),
+            Trip("Отмененный Отель 2", "Казань, Россия", "5 - 10 августа 2023 г.", "25 000 руб.")
         )
     }
 }

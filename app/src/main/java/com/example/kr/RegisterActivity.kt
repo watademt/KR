@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.kr.data.MainScreenDataObject
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 
@@ -40,6 +41,10 @@ class RegisterActivity : AppCompatActivity() {
                                     "Authentication Successful.",
                                     Toast.LENGTH_SHORT,
                                 ).show()
+                                MainScreenDataObject(
+                                    task.result.user?.uid!!,
+                                    task.result.user?.email!!
+                                )
                                 val intent = Intent(this, MainActivity::class.java)
                                 startActivity(intent)
                                 finish()
@@ -62,33 +67,6 @@ class RegisterActivity : AppCompatActivity() {
                 Toast.makeText(this, "Заполните все поля", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-// Старая регистрация
-//            // Проверка ввода
-//            if (username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
-//                Toast.makeText(this, "Заполните все поля", Toast.LENGTH_SHORT).show()
-//                return@setOnClickListener
-//            }
-//
-//            if (password != confirmPassword) {
-//                Toast.makeText(this, "Пароли не совпадают", Toast.LENGTH_SHORT).show()
-//                return@setOnClickListener
-//            }
-//
-//            // Сохранение данных (например, в SharedPreferences)
-//            val sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE)
-//            sharedPreferences.edit().putString("registered_username", username).apply()
-//
-//            sharedPreferences.edit()
-//                .putString("registered_username", username)
-//                .putString("registered_password", password)
-//                .apply()
-//
-//            Toast.makeText(this, "Регистрация успешна", Toast.LENGTH_SHORT).show()
-//
-//            // Переход на LoginActivity
-//            val intent = Intent(this, LoginActivity::class.java)
-//            startActivity(intent)
-//            finish()
         }
     }
 }

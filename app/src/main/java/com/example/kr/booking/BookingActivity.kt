@@ -1,4 +1,4 @@
-package com.example.kr.Booking
+package com.example.kr.booking
 
 import android.app.DatePickerDialog
 import android.content.Intent

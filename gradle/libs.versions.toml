@@ -1,6 +1,6 @@
 [versions]
 agp = "8.3.1"
-kotlin = "1.9.0"
+kotlin = "2.0.0"
 coreKtx = "1.15.0"
 junit = "4.13.2"
 junitVersion = "1.2.1"
@@ -12,8 +12,13 @@ material = "1.12.0"
 composeUi = "1.5.2"
 gmsVersion = "4.4.2"
 bomVersion = "33.7.0"
+navigationCompose = "2.8.5"
+serializationVersion = "2.0.0"
+serializationKotlin = "1.7.1"
 
 [libraries]
+kotlinx-serialization-json = {module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "serializationKotlin"}
+androidx-navigation-compose = {module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose"}
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "bomVersion" }
 firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore-ktx"}
@@ -40,3 +45,5 @@ android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 gms = { id = "com.google.gms.google-services", version.ref = "gmsVersion" }
 
+plugin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "serializationVersion"}
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin"}

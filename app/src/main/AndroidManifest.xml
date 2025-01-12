@@ -41,14 +41,14 @@
 
         <!-- BookingActivity -->
         <activity
-            android:name=".Booking.BookingActivity"
+            android:name=".booking.BookingActivity"
             android:exported="true"
             android:label="Бронирование"
             android:theme="@style/Theme.KR" />
 
         <!-- AccountManagementActivity -->
         <activity
-            android:name=".Profile.AccountManagementActivity"
+            android:name=".profile.AccountManagementActivity"
             android:exported="true"
             android:label="Управление аккаунтом"
             android:theme="@style/Theme.KR" />

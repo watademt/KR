@@ -1,14 +1,17 @@
-package com.example.kr.Profile
+package com.example.kr.profile
 
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.widget.*
+import android.widget.Button
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.kr.R
-import java.util.*
+import java.util.Calendar
 
 //Изменения аккаунта
 class AccountManagementActivity : AppCompatActivity() {

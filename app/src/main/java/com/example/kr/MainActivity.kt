@@ -3,9 +3,9 @@ package com.example.kr
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.example.kr.Hotel.SearchFragment
-import com.example.kr.Profile.ProfileFragment
-import com.example.kr.Trip.TripsFragment
+import com.example.kr.hotel.SearchFragment
+import com.example.kr.profile.ProfileFragment
+import com.example.kr.trip.TripsFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
@@ -16,6 +16,8 @@ class MainActivity : AppCompatActivity() {
 //        fs.collection("hotels")
 //            .document().set(mapOf("name" to "Visockiy"))
         setContentView(R.layout.activity_main)
+
+
 
         val sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE)
         val isLoggedIn = sharedPreferences.getBoolean("is_logged_in", false)

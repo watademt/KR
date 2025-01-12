@@ -1,4 +1,4 @@
-package com.example.kr.Employee
+package com.example.kr.employee
 
 import android.content.Intent
 import android.os.Bundle

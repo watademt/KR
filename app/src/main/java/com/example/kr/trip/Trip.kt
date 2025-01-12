@@ -1,4 +1,4 @@
-package com.example.kr.Trip
+package com.example.kr.trip
 
 data class Trip(
     val name: String,
