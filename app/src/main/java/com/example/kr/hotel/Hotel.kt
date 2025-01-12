@@ -4,6 +4,6 @@ data class Hotel(
     val name: String,
     val description: String,
     val price: String,
-    val imageResource: Int,
+    val imageResource: String, // Ссылка на ресурс изображения
     val location: String
 )

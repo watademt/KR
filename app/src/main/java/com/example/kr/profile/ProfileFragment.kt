@@ -3,7 +3,6 @@ package com.example.kr.profile
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.kr.LoginActivity
@@ -22,9 +21,9 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 //        val sharedPreferences = requireActivity().getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
 //        val username = sharedPreferences.getString("logged_in_username", "Гость")
 
-        // Отображение имени пользователя
-        val userNameTextView = view.findViewById<TextView>(R.id.tvUserName)
-        userNameTextView.text = navData.toString()
+//        // Отображение имени пользователя
+//        val userNameTextView = view.findViewById<TextView>(R.id.tvUserName)
+//        userNameTextView.text = navData.toString()
 //
         // Кнопка "Управление аккаунтом"
         view.findViewById<View>(R.id.btnAccountManagement).setOnClickListener {
