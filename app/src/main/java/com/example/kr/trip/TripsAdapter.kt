@@ -39,7 +39,9 @@ class TripsAdapter(
         holder.tripImage.setImageResource(resourceId)
 
         holder.leaveReview.setOnClickListener { onLeaveReview(trip) }
-        holder.repeatBooking.setOnClickListener { onRepeatBooking(trip) }
+        holder.repeatBooking.setOnClickListener {
+            onRepeatBooking(trip)
+        }
     }
 
     override fun getItemCount(): Int = trips.size
