@@ -1,6 +1,5 @@
 package com.example.kr.employee
 
-import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
@@ -15,7 +14,6 @@ import com.example.kr.booking.Booking
 //Передача данных для карточек
 class BookingAdapter(
     private var bookings: MutableList<Booking>,
-    private val context: Context,
     private val onBookingAction: (String, String) -> Unit // Callback с ID и новым статусом
 ) : RecyclerView.Adapter<BookingAdapter.BookingViewHolder>() {
 
@@ -41,11 +39,13 @@ class BookingAdapter(
         holder.userName.text = booking.userName
         holder.bookingDates.text = "${booking.startDate} - ${booking.endDate}"
         holder.bookingPrice.text = "Цена: ${booking.price}"
+
+        // Преобразуем имя ресурса в идентификатор и устанавливаем изображение
+        val context = holder.itemView.context
         val resourceId = context.resources.getIdentifier(booking.hotelImageRes, "drawable", context.packageName)
         holder.hotelImage.setImageResource(resourceId)
 
         holder.detailsButton.setOnClickListener {
-            val context: Context = holder.itemView.context
             val intent = Intent(context, BookingDetailsActivity::class.java).apply {
                 putExtra("booking_id", booking.id)
                 putExtra("hotel_name", booking.hotelName)
@@ -54,13 +54,12 @@ class BookingAdapter(
                 putExtra("price", booking.price)
                 putExtra("room_type", booking.roomType)
                 putExtra("bed_details", booking.bedDetails)
-                putExtra("hotel_image", booking.hotelImageRes)
-                putExtra("client_name", booking.userName) // Передача ФИО
-                putExtra("client_phone", booking.clientPhone) // Передача номера телефона
+                putExtra("hotel_image", resourceId) // Передаем идентификатор ресурса
+                putExtra("client_name", booking.userName)
+                putExtra("client_phone", booking.clientPhone)
             }
             context.startActivity(intent)
         }
-
     }
 
     override fun getItemCount() = bookings.size

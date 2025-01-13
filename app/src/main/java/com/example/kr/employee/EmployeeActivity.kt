@@ -58,13 +58,13 @@ class EmployeeActivity : AppCompatActivity() {
                             id = document.id,
                             hotelName = document.getString("hotelName") ?: "",
                             userName = document.getString("clientName") ?: "",
-                            clientPhone = document.getString("clientPhone") ?: "", // Номер телефона
+                            clientPhone = document.getString("clientPhone") ?: "",
                             startDate = document.getString("startDate") ?: "",
                             endDate = document.getString("endDate") ?: "",
                             price = document.get("hotelPrice").toString(),
                             roomType = document.getString("roomType") ?: "",
                             bedDetails = "${document.getString("numberOfBeds")} кровати, ${document.getString("bedType")}",
-                            hotelImageRes = document.getString("hotelImageRes") ?: "default_image",
+                            hotelImageRes = document.getString("hotelImageRes") ?: "default_image", // Получаем имя ресурса
                             status = "active"
                         )
                         activeBookings.add(booking)
@@ -77,19 +77,4 @@ class EmployeeActivity : AppCompatActivity() {
             }
     }
 
-
-
-//    private fun updateBookingStatus(bookingId: String, newStatus: String) {
-        // Обновляем статус бронирования в Firestore
-//        Toast.makeText(this, bookingId, Toast.LENGTH_SHORT).show()
-//        firestore.collection("bookings").document(bookingId)
-//            .update("status", newStatus)
-//            .addOnSuccessListener {
-                // После обновления загружаем актуальный список
-//                loadBookingsFromFirestore()
-//            }
-//            .addOnFailureListener { e ->
-//                e.printStackTrace()
-//            }
-//    }
 }
