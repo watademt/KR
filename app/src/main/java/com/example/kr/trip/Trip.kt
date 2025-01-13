@@ -5,6 +5,7 @@ data class Trip(
     val location: String,
     val dates: String,
     val price: String,
+    val pricePerNight: String,
     val description: String,
     val imageResource: String // Имя ресурса изображения
 )

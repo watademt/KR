@@ -1,5 +1,6 @@
 package com.example.kr.trip
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -7,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kr.R
+import com.example.kr.booking.BookingActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -30,11 +32,15 @@ class CancelledTripsFragment : Fragment(R.layout.fragment_trips_list) {
             .get()
             .addOnSuccessListener { result ->
                 val trips = result.mapNotNull { document ->
+                    val originalPrice = document.getDouble("hotelPrice") ?: 0.0
+                    val nights = document.getDouble("nights") ?: 0.0
+                    val modifiedPrice = originalPrice / nights
                     Trip(
                         name = document.getString("hotelName") ?: "",
                         location = document.getString("hotelLocation") ?: "",
                         dates = "${document.getString("startDate")} - ${document.getString("endDate")}",
                         price = document.getDouble("hotelPrice")?.toString() ?: "",
+                        pricePerNight = modifiedPrice.toString(),
                         description = document.getString("hotelDescription") ?: "",
                         imageResource = document.getString("hotelImageRes") ?: "default_image"
                     )
@@ -51,6 +57,14 @@ class CancelledTripsFragment : Fragment(R.layout.fragment_trips_list) {
     }
 
     private fun onRepeatBooking(trip: Trip) {
-        // Логика для повторного бронирования
+        // Переход в BookingActivity с передачей данных о поездке
+        val intent = Intent(requireContext(), BookingActivity::class.java).apply {
+            putExtra("hotel_name", trip.name)
+            putExtra("hotel_description", trip.description)
+            putExtra("hotel_price", trip.pricePerNight)
+            putExtra("hotel_image_resource", trip.imageResource)
+            putExtra("hotel_location", trip.location)
+        }
+        startActivity(intent)
     }
 }
