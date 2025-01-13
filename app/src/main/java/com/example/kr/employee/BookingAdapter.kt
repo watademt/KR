@@ -9,12 +9,13 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.kr.booking.Booking
 import com.example.kr.R
+import com.example.kr.booking.Booking
 
 //Передача данных для карточек
 class BookingAdapter(
     private var bookings: MutableList<Booking>,
+    private val context: Context,
     private val onBookingAction: (String, String) -> Unit // Callback с ID и новым статусом
 ) : RecyclerView.Adapter<BookingAdapter.BookingViewHolder>() {
 
@@ -40,7 +41,8 @@ class BookingAdapter(
         holder.userName.text = booking.userName
         holder.bookingDates.text = "${booking.startDate} - ${booking.endDate}"
         holder.bookingPrice.text = "Цена: ${booking.price}"
-        holder.hotelImage.setImageResource(booking.hotelImageRes)
+        val resourceId = context.resources.getIdentifier(booking.hotelImageRes, "drawable", context.packageName)
+        holder.hotelImage.setImageResource(resourceId)
 
         holder.detailsButton.setOnClickListener {
             val context: Context = holder.itemView.context

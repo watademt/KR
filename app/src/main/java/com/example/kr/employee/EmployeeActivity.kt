@@ -3,7 +3,6 @@ package com.example.kr.employee
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -65,7 +64,7 @@ class EmployeeActivity : AppCompatActivity() {
                             price = document.get("hotelPrice").toString(),
                             roomType = document.getString("roomType") ?: "",
                             bedDetails = "${document.getString("numberOfBeds")} кровати, ${document.getString("bedType")}",
-                            hotelImageRes = R.drawable.hotel_image,
+                            hotelImageRes = document.getString("hotelImageRes") ?: "default_image",
                             status = "active"
                         )
                         activeBookings.add(booking)
