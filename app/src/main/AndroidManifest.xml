@@ -52,6 +52,16 @@
             android:exported="true"
             android:label="Управление аккаунтом"
             android:theme="@style/Theme.KR" />
+        <activity
+            android:name=".employee.EmployeeActivity"
+            android:exported="true"
+            android:label="Панель администратора"
+            android:theme="@style/Theme.KR" />
+        <activity
+            android:name=".employee.BookingDetailsActivity"
+            android:exported="true"
+            android:label="Информация для администратора"
+            android:theme="@style/Theme.KR" />
 
     </application>
 

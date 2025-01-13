@@ -1,11 +1,17 @@
 package com.example.kr.employee
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.kr.LoginActivity
 import com.example.kr.booking.Booking
 import com.example.kr.R
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
 
 //Обработка нажатия кнопок на странице сотрудника
 class EmployeeActivity : AppCompatActivity() {
@@ -57,6 +63,15 @@ class EmployeeActivity : AppCompatActivity() {
 
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
+
+
+        findViewById<View>(R.id.buttonExit).setOnClickListener {
+            Firebase.auth.signOut()
+//
+            val intent = Intent(this, LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK // Удаляем историю переходов
+            startActivity(intent)
+        }
     }
 
     private fun updateBookingStatus(bookingId: String, newStatus: String) {
@@ -68,4 +83,3 @@ class EmployeeActivity : AppCompatActivity() {
         adapter.updateBookings(activeBookings)
     }
 }
-

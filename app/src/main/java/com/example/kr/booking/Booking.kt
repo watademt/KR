@@ -12,4 +12,3 @@ data class Booking(
     val hotelImageRes: Int,
     var status: String
 )
-
