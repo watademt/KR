@@ -10,6 +10,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.kr.data.MainScreenDataObject
+import com.example.kr.employee.EmployeeActivity
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 
@@ -31,8 +32,13 @@ class LoginActivity : AppCompatActivity() {
                 "Authentication success.",
                 Toast.LENGTH_SHORT,
             ).show()
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            if(currentUser.uid=="qqUQbATmCcXw4fHla7phh0pOdvx2"){
+                val intent = Intent(this, EmployeeActivity::class.java)
+                startActivity(intent)
+            }else{
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+            }
         }
 // Авторизация
         loginButton.setOnClickListener {
@@ -48,9 +54,15 @@ class LoginActivity : AppCompatActivity() {
                             task.result.user?.uid!!,
                             task.result.user?.email!!
                         )
+                        if(task.result.user?.uid!!.toString()=="qqUQbATmCcXw4fHla7phh0pOdvx2"){
+                            val intent = Intent(this, EmployeeActivity::class.java)
+                            startActivity(intent)
+                            finish()
+                        }else{
                         val intent = Intent(this, MainActivity::class.java)
                         startActivity(intent)
                         finish()
+                        }
                     } else {
                         // If sign in fails, display a message to the user.
                         Log.w(TAG, "signInWithEmail:failure", task.exception)
