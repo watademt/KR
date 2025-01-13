@@ -8,14 +8,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kr.R
 
-//Обработка кнопок и переключения вкладкок
 class TripsAdapter(
     private val trips: List<Trip>,
     private val onLeaveReview: (Trip) -> Unit,
     private val onRepeatBooking: (Trip) -> Unit
 ) : RecyclerView.Adapter<TripsAdapter.TripViewHolder>() {
 
-    // ViewHolder для каждого элемента списка
     class TripViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tripName: TextView = itemView.findViewById(R.id.trip_name)
         val tripDetails: TextView = itemView.findViewById(R.id.trip_details)
@@ -29,22 +27,14 @@ class TripsAdapter(
         return TripViewHolder(view)
     }
 
-
     override fun onBindViewHolder(holder: TripViewHolder, position: Int) {
         val trip = trips[position]
         holder.tripName.text = trip.name
         holder.tripDetails.text = "${trip.location}\n${trip.dates}\n${trip.price}"
         holder.tripImage.setImageResource(R.drawable.hotel_image)
 
-        // Обработка клика на "Оставить отзыв"
-        holder.leaveReview.setOnClickListener {
-            onLeaveReview(trip)
-        }
-
-        // Обработка клика на "Повторить бронирование"
-        holder.repeatBooking.setOnClickListener {
-            onRepeatBooking(trip)
-        }
+        holder.leaveReview.setOnClickListener { onLeaveReview(trip) }
+        holder.repeatBooking.setOnClickListener { onRepeatBooking(trip) }
     }
 
     override fun getItemCount(): Int = trips.size

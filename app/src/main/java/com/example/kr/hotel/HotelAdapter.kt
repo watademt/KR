@@ -46,7 +46,7 @@ class HotelAdapter(private val hotels: List<Hotel>) : RecyclerView.Adapter<Hotel
                 putExtra("hotel_name", hotel.name)
                 putExtra("hotel_description", hotel.description)
                 putExtra("hotel_price", hotel.price)
-                putExtra("hotel_image", resourceId)
+                putExtra("hotel_image_resource", hotel.imageResource) // Передаем имя ресурса
                 putExtra("hotel_location", hotel.location)
             }
             context.startActivity(intent)
