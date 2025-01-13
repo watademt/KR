@@ -29,6 +29,7 @@ class TripsAdapter(
         return TripViewHolder(view)
     }
 
+
     override fun onBindViewHolder(holder: TripViewHolder, position: Int) {
         val trip = trips[position]
         holder.tripName.text = trip.name

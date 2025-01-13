@@ -2,6 +2,7 @@ package com.example.kr.trip
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kr.R
+import com.example.kr.booking.BookingActivity
 
 //Прошедшие поездки
 class PastTripsFragment : Fragment() {
@@ -58,8 +60,14 @@ class PastTripsFragment : Fragment() {
             }
             ,
             onRepeatBooking = { trip ->
-                // Логика для повторного бронирования
-                Toast.makeText(requireContext(), "Повторить бронирование для: ${trip.name}", Toast.LENGTH_SHORT).show()
+                // Переход на BookingActivity
+                val intent = Intent(requireContext(), BookingActivity::class.java).apply {
+                    putExtra("hotel_name", trip.name)
+                    putExtra("hotel_location", trip.location)
+                    putExtra("dates", trip.dates)
+                    putExtra("price", trip.price)
+                }
+                startActivity(intent)
             }
         )
         return view
