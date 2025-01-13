@@ -40,11 +40,12 @@ class PastTripsFragment : Fragment(R.layout.fragment_trips_list) {
                             location = document.getString("hotelLocation") ?: "",
                             dates = "${document.getString("startDate")} - $endDate",
                             price = document.getDouble("hotelPrice")?.toString() ?: "",
-                            description = document.getString("hotelDescription") ?: ""
+                            description = document.getString("hotelDescription") ?: "",
+                            imageResource = document.getString("hotelImageRes") ?: "default_image"
                         )
                     } else null
                 }
-                recyclerView.adapter = TripsAdapter(trips, ::onLeaveReview, ::onRepeatBooking)
+                recyclerView.adapter = TripsAdapter(trips, requireContext(), ::onLeaveReview, ::onRepeatBooking)
             }
             .addOnFailureListener {
                 Toast.makeText(context, "Ошибка загрузки прошлых поездок", Toast.LENGTH_SHORT).show()

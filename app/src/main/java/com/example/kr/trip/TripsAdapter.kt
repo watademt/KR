@@ -1,5 +1,6 @@
 package com.example.kr.trip
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import com.example.kr.R
 
 class TripsAdapter(
     private val trips: List<Trip>,
+    private val context: Context,
     private val onLeaveReview: (Trip) -> Unit,
     private val onRepeatBooking: (Trip) -> Unit
 ) : RecyclerView.Adapter<TripsAdapter.TripViewHolder>() {
@@ -31,7 +33,10 @@ class TripsAdapter(
         val trip = trips[position]
         holder.tripName.text = trip.name
         holder.tripDetails.text = "${trip.location}\n${trip.dates}\n${trip.price}"
-        holder.tripImage.setImageResource(R.drawable.hotel_image)
+
+        // Преобразование имени ресурса в идентификатор и установка изображения
+        val resourceId = context.resources.getIdentifier(trip.imageResource, "drawable", context.packageName)
+        holder.tripImage.setImageResource(resourceId)
 
         holder.leaveReview.setOnClickListener { onLeaveReview(trip) }
         holder.repeatBooking.setOnClickListener { onRepeatBooking(trip) }
