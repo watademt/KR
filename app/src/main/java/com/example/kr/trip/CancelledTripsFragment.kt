@@ -35,10 +35,11 @@ class CancelledTripsFragment : Fragment(R.layout.fragment_trips_list) {
                         location = document.getString("hotelLocation") ?: "",
                         dates = "${document.getString("startDate")} - ${document.getString("endDate")}",
                         price = document.getDouble("hotelPrice")?.toString() ?: "",
-                        description = document.getString("hotelDescription") ?: ""
+                        description = document.getString("hotelDescription") ?: "",
+                        imageResource = document.getString("hotelImageRes") ?: "default_image"
                     )
                 }
-                recyclerView.adapter = TripsAdapter(trips, ::onLeaveReview, ::onRepeatBooking)
+                recyclerView.adapter = TripsAdapter(trips, requireContext(), ::onLeaveReview, ::onRepeatBooking)
             }
             .addOnFailureListener {
                 Toast.makeText(context, "Ошибка загрузки отмененных поездок", Toast.LENGTH_SHORT).show()
