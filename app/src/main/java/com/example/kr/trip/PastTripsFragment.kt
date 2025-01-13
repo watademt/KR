@@ -55,6 +55,7 @@ class PastTripsFragment : Fragment(R.layout.fragment_trips_list) {
 
     private fun onLeaveReview(trip: Trip) {
         // Логика для оставления отзыва
+
     }
 
     private fun onRepeatBooking(trip: Trip) {
