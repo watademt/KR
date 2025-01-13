@@ -26,7 +26,7 @@ class PastTripsFragment : Fragment(R.layout.fragment_trips_list) {
     private fun loadPastTrips(recyclerView: RecyclerView) {
         val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
         val currentDate = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
-
+        var status="0"
         FirebaseFirestore.getInstance()
             .collection("bookings")
             .whereEqualTo("clientUID", userId)
@@ -36,6 +36,7 @@ class PastTripsFragment : Fragment(R.layout.fragment_trips_list) {
                     val endDate = document.getString("endDate") ?: ""
                     if (endDate < currentDate) {
                         Trip(
+                            status = "2",
                             name = document.getString("hotelName") ?: "",
                             location = document.getString("hotelLocation") ?: "",
                             dates = "${document.getString("startDate")} - $endDate",

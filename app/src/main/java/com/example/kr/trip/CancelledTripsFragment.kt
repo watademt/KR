@@ -22,7 +22,7 @@ class CancelledTripsFragment : Fragment(R.layout.fragment_trips_list) {
 
     private fun loadCancelledTrips(recyclerView: RecyclerView) {
         val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
-
+        var status="0";
         FirebaseFirestore.getInstance()
             .collection("bookings")
             .whereEqualTo("clientUID", userId)
@@ -31,6 +31,7 @@ class CancelledTripsFragment : Fragment(R.layout.fragment_trips_list) {
             .addOnSuccessListener { result ->
                 val trips = result.mapNotNull { document ->
                     Trip(
+                        status = "2",
                         name = document.getString("hotelName") ?: "",
                         location = document.getString("hotelLocation") ?: "",
                         dates = "${document.getString("startDate")} - ${document.getString("endDate")}",

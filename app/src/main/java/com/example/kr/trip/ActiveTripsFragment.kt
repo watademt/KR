@@ -26,7 +26,7 @@ class ActiveTripsFragment : Fragment(R.layout.fragment_trips_list) {
     private fun loadActiveTrips(recyclerView: RecyclerView) {
         val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
         val currentDate = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
-
+        var status = "0"
         FirebaseFirestore.getInstance()
             .collection("bookings")
             .whereEqualTo("clientUID", userId)
@@ -37,7 +37,9 @@ class ActiveTripsFragment : Fragment(R.layout.fragment_trips_list) {
                     val endDate = document.getString("endDate") ?: ""
                     // Отфильтровываем поездки, у которых дата окончания >= текущей даты
                     if (endDate >= currentDate) {
+
                         Trip(
+                            status = document.getString("status")?:"",
                             name = document.getString("hotelName") ?: "",
                             location = document.getString("hotelLocation") ?: "",
                             dates = "${document.getString("startDate")} - $endDate",

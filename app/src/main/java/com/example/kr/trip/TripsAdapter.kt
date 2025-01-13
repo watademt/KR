@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kr.R
 
@@ -37,7 +38,13 @@ class TripsAdapter(
         // Преобразование имени ресурса в идентификатор и установка изображения
         val resourceId = context.resources.getIdentifier(trip.imageResource, "drawable", context.packageName)
         holder.tripImage.setImageResource(resourceId)
-
+        if(trip.status=="0") {holder.leaveReview.text="Не подтвержденно"}
+            else
+            {
+                if(trip.status=="1"){holder.leaveReview.text="Подтвержденно"}
+                else
+                {holder.leaveReview.isVisible=false}
+            }
         holder.leaveReview.setOnClickListener { onLeaveReview(trip) }
         holder.repeatBooking.setOnClickListener { onRepeatBooking(trip) }
     }
