@@ -57,14 +57,16 @@ class BookingActivity : AppCompatActivity() {
         val hotelNameText = intent.getStringExtra("hotel_name")
         val hotelDescriptionText = intent.getStringExtra("hotel_description")
         val hotelPriceText = intent.getStringExtra("hotel_price")
-        val hotelImageRes = intent.getIntExtra("hotel_image", 0)
+        val hotelImageResource = intent.getStringExtra("hotel_image_resource") ?: "default_image"
         val hotelLocationText = intent.getStringExtra("hotel_location")
 
         // Установка данных в элементы интерфейса
         hotelName.text = hotelNameText
         hotelDescription.text = hotelDescriptionText
         hotelPrice.text = hotelPriceText
-        hotelImage.setImageResource(hotelImageRes)
+        hotelImage.setImageResource(
+            resources.getIdentifier(hotelImageResource, "drawable", packageName)
+        )
         hotelLocation.text = hotelLocationText
 
         // Настройка выбора дат
@@ -110,7 +112,8 @@ class BookingActivity : AppCompatActivity() {
                     endDate,
                     roomType,
                     bedType,
-                    numberOfBeds
+                    numberOfBeds,
+                    hotelImageResource
                 )
             }
         }
@@ -119,15 +122,15 @@ class BookingActivity : AppCompatActivity() {
     private fun createBooking(
         hotelName: String,
         hotelDescription: String,
-        hotelPrice: String, // Цена за ночь
+        hotelPrice: String,
         hotelLocation: String,
         startDate: String,
         endDate: String,
         roomType: String,
         bedType: String,
-        numberOfBeds: String
+        numberOfBeds: String,
+        hotelImageResource: String
     ) {
-        // Получаем UID текущего пользователя
         val currentUser = auth.currentUser
         if (currentUser == null) {
             Toast.makeText(this, "Вы не авторизованы!", Toast.LENGTH_SHORT).show()
@@ -136,7 +139,6 @@ class BookingActivity : AppCompatActivity() {
 
         val userId = currentUser.uid
 
-        // Получаем данные клиента из коллекции `clients`
         firestore.collection("accounts").document(userId).get()
             .addOnSuccessListener { clientDocument ->
                 if (clientDocument.exists()) {
@@ -144,42 +146,38 @@ class BookingActivity : AppCompatActivity() {
                     val clientPhone = clientDocument.getString("number") ?: "Неизвестно"
                     val clientDOB = clientDocument.getString("birthday") ?: "Неизвестно"
 
-                    // Вычисляем количество ночей
                     val nights = calculateDaysBetween(startDate, endDate)
                     if (nights <= 0) {
                         Toast.makeText(this, "Выберите корректные даты!", Toast.LENGTH_SHORT).show()
                         return@addOnSuccessListener
                     }
 
-                    // Преобразуем цену за ночь в Double
                     val pricePerNight = hotelPrice.toDoubleOrNull() ?: 0.0
-                    val totalPrice = pricePerNight * nights // Итоговая цена
+                    val totalPrice = pricePerNight * nights
 
-                    // Данные бронирования
                     val bookingData = mapOf(
                         "hotelName" to hotelName,
                         "hotelDescription" to hotelDescription,
-                        "hotelPrice" to totalPrice, // Итоговая цена
+                        "hotelPrice" to totalPrice,
                         "hotelLocation" to hotelLocation,
                         "startDate" to startDate,
                         "endDate" to endDate,
                         "roomType" to roomType,
                         "bedType" to bedType,
                         "numberOfBeds" to numberOfBeds,
-                        "nights" to nights, // Количество ночей
+                        "nights" to nights,
                         "clientName" to clientName,
                         "clientPhone" to clientPhone,
                         "clientDOB" to clientDOB,
                         "clientUID" to userId,
-                        "status" to "0"
+                        "status" to "0",
+                        "hotelImageRes" to hotelImageResource // Сохраняем имя ресурса
                     )
 
-                    // Сохраняем данные в коллекции `bookings`
                     firestore.collection("bookings")
                         .add(bookingData)
                         .addOnSuccessListener {
                             Toast.makeText(this, "Бронирование успешно оформлено!", Toast.LENGTH_SHORT).show()
-                            // Переход на главную страницу
                             val intent = Intent(this, MainActivity::class.java)
                             intent.putExtra("open_fragment", "search")
                             startActivity(intent)

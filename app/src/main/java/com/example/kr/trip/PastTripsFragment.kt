@@ -1,82 +1,61 @@
 package com.example.kr.trip
 
-import android.annotation.SuppressLint
-import android.app.AlertDialog
-import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.RatingBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kr.R
-import com.example.kr.booking.BookingActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
-//Прошедшие поездки
-class PastTripsFragment : Fragment() {
-    @SuppressLint("MissingInflatedId")
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_trips_list, container, false)
+class PastTripsFragment : Fragment(R.layout.fragment_trips_list) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        recyclerView.adapter = TripsAdapter(
-            trips = getPastTrips(),
-            onLeaveReview = { trip ->
-                val dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_review, null)
-                val dialog = AlertDialog.Builder(context)
-                    .setView(dialogView)
-                    .create()
 
-                val ratingBar = dialogView.findViewById<RatingBar>(R.id.review_rating)
-                val commentInput = dialogView.findViewById<EditText>(R.id.review_comment)
-                val submitButton = dialogView.findViewById<Button>(R.id.submit_button)
-                val cancelButton = dialogView.findViewById<Button>(R.id.cancel_button)
-
-                cancelButton.setOnClickListener {
-                    dialog.dismiss()
-                }
-
-                submitButton.setOnClickListener {
-                    val rating = ratingBar.rating
-                    val comment = commentInput.text.toString()
-                    if (rating > 0) {
-                        Toast.makeText(context, "Спасибо за отзыв!", Toast.LENGTH_SHORT).show()
-                        dialog.dismiss()
-                    } else {
-                        Toast.makeText(context, "Пожалуйста, поставьте оценку", Toast.LENGTH_SHORT).show()
-                    }
-                }
-
-                dialog.show()
-            }
-            ,
-            onRepeatBooking = { trip ->
-                // Переход на BookingActivity
-                val intent = Intent(requireContext(), BookingActivity::class.java).apply {
-                    putExtra("hotel_name", trip.name)
-                    putExtra("hotel_location", trip.location)
-                    putExtra("dates", trip.dates)
-                    putExtra("price", trip.price)
-                }
-                startActivity(intent)
-            }
-        )
-        return view
+        loadPastTrips(recyclerView)
     }
 
-    private fun getPastTrips(): List<Trip> {
-        return listOf(
-            Trip("Грейс Аква Вилла 4*", "Абхазия, Сухум", "24 - 31 июля 2023 г.", "10 349 руб."),
-            Trip("Rios Beach (Intersport com.example.kr.Hotel.Hotel) 4*", "Турция, Кемер", "29 - 5 июля 2022 г.", "120 389 руб.")
-        )
+    private fun loadPastTrips(recyclerView: RecyclerView) {
+        val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
+        val currentDate = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
+
+        FirebaseFirestore.getInstance()
+            .collection("bookings")
+            .whereEqualTo("clientUID", userId)
+            .get()
+            .addOnSuccessListener { result ->
+                val trips = result.mapNotNull { document ->
+                    val endDate = document.getString("endDate") ?: ""
+                    if (endDate < currentDate) {
+                        Trip(
+                            name = document.getString("hotelName") ?: "",
+                            location = document.getString("hotelLocation") ?: "",
+                            dates = "${document.getString("startDate")} - $endDate",
+                            price = document.getDouble("hotelPrice")?.toString() ?: "",
+                            description = document.getString("hotelDescription") ?: ""
+                        )
+                    } else null
+                }
+                recyclerView.adapter = TripsAdapter(trips, ::onLeaveReview, ::onRepeatBooking)
+            }
+            .addOnFailureListener {
+                Toast.makeText(context, "Ошибка загрузки прошлых поездок", Toast.LENGTH_SHORT).show()
+            }
+    }
+
+    private fun onLeaveReview(trip: Trip) {
+        // Логика для оставления отзыва
+    }
+
+    private fun onRepeatBooking(trip: Trip) {
+        // Логика для повторного бронирования
     }
 }
