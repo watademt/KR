@@ -1,0 +1,56 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="8dp"
+    android:layout_margin="8dp"
+    android:elevation="4dp"
+    android:background="#FBF8EB">
+
+    <!-- Изображение отеля -->
+    <ImageView
+        android:id="@+id/review_hotel_image"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/hotel_image" />
+
+    <!-- Информация об отзыве -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp">
+
+        <!-- Название отеля -->
+        <TextView
+            android:id="@+id/review_hotel_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Название отеля"
+            android:textSize="16sp"
+            android:textColor="@color/button" />
+
+        <!-- Рейтинг -->
+        <TextView
+            android:id="@+id/review_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="★★★★★"
+            android:textSize="14sp"
+            android:textColor="#FFC107" />
+
+        <!-- Отзыв -->
+        <TextView
+            android:id="@+id/review_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Текст отзыва"
+            android:textSize="12sp"
+            android:textColor="#6D6D6D" />
+    </LinearLayout>
+</LinearLayout>

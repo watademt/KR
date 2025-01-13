@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.kr.LoginActivity
 import com.example.kr.R
+import com.example.kr.reviews.ReviewsFragment
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 
@@ -30,10 +31,14 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             val intent = Intent(requireContext(), AccountManagementActivity::class.java)
             startActivity(intent)
         }
-//        // Кнопка "Ваши отзывы"
-//        view.findViewById<View>(R.id.btnUserReviews).setOnClickListener {
-//            Toast.makeText(requireContext(), "Ваши отзывы", Toast.LENGTH_SHORT).show()
-//        }
+        // Кнопка "Ваши отзывы"
+        view.findViewById<View>(R.id.btnUserReviews).setOnClickListener {
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, ReviewsFragment())
+                .addToBackStack(null)
+                .commit()
+        }
+
 //
 //        // Кнопка "Связаться с нами"
 //        view.findViewById<View>(R.id.btnContactUs).setOnClickListener {
