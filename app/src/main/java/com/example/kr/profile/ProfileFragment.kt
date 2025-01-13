@@ -3,6 +3,7 @@ package com.example.kr.profile
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.kr.LoginActivity
@@ -10,11 +11,15 @@ import com.example.kr.R
 import com.example.kr.reviews.ReviewsFragment
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
+import com.google.firebase.firestore.FirebaseFirestore
 
 //Профиль пользователя
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val firestore = FirebaseFirestore.getInstance()
+        val auth = Firebase.auth
+        val currentUser = auth.currentUser
 //             val navData = MainScreenDataObject
 // Не нужно пока что
         // Получение имени пользователя из SharedPreferences
@@ -22,8 +27,15 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 //        val username = sharedPreferences.getString("logged_in_username", "Гость")
 
 //        // Отображение имени пользователя
-//        val userNameTextView = view.findViewById<TextView>(R.id.tvUserName)
-//        userNameTextView.text = navData.toString()
+        if (currentUser != null) {
+        val userNameTextView = view.findViewById<TextView>(R.id.tvUserName)
+        firestore.collection("accounts").document(currentUser?.uid!!).get()
+            .addOnSuccessListener { document->
+                if(document !=null && document.exists()){
+                    userNameTextView.text = document.getString("name") ?:""
+                }
+            }
+        }
 //
         // Кнопка "Управление аккаунтом"
         view.findViewById<View>(R.id.btnAccountManagement).setOnClickListener {
