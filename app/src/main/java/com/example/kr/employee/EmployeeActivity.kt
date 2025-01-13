@@ -1,12 +1,17 @@
 package com.example.kr.employee
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.kr.LoginActivity
 import com.example.kr.R
 import com.example.kr.booking.Booking
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
 import com.google.firebase.firestore.FirebaseFirestore
 
 class EmployeeActivity : AppCompatActivity() {
@@ -32,6 +37,14 @@ class EmployeeActivity : AppCompatActivity() {
 
         // Загрузка бронирований из Firestore
         loadBookingsFromFirestore()
+
+        findViewById<View>(R.id.buttonExit).setOnClickListener {
+            Firebase.auth.signOut()
+            // Переход на экран входа
+            val intent = Intent(this, LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK // Удаляем историю переходов
+            startActivity(intent)
+        }
     }
 
     private fun loadBookingsFromFirestore() {
