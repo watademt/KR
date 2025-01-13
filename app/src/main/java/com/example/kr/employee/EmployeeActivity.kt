@@ -1,85 +1,83 @@
 package com.example.kr.employee
 
-import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.kr.LoginActivity
-import com.example.kr.booking.Booking
 import com.example.kr.R
-import com.google.firebase.Firebase
-import com.google.firebase.auth.auth
+import com.example.kr.booking.Booking
+import com.google.firebase.firestore.FirebaseFirestore
 
-//Обработка нажатия кнопок на странице сотрудника
 class EmployeeActivity : AppCompatActivity() {
 
     private lateinit var adapter: BookingAdapter
     private lateinit var bookings: MutableList<Booking>
+    private val firestore = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_employee)
 
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerViewBookings)
-
-        // Пример данных
-        bookings = mutableListOf(
-            Booking(
-                id = "1",
-                hotelName = "Rios Beach",
-                userName = "Иванов Иван",
-                startDate = "10.01.2025",
-                endDate = "15.01.2025",
-                price = "150 000 руб.",
-                roomType = "Люкс",
-                bedDetails = "2 кровати, Кинг-сайз",
-                hotelImageRes = R.drawable.hotel_image,
-                status = "active"
-            ),
-            Booking(
-                id = "2",
-                hotelName = "Club com.example.kr.Hotel.Hotel Anjeliq",
-                userName = "Петров Петр",
-                startDate = "12.01.2025",
-                endDate = "18.01.2025",
-                price = "200 000 руб.",
-                roomType = "Одноместный",
-                bedDetails = "1 кровать, Двуспальная",
-                hotelImageRes = R.drawable.hotel_image,
-                status = "cancelled" // Эта бронь будет исключена
-            )
-        )
-
-        // Фильтруем только активные брони
-        val activeBookings = bookings.filter { it.status == "active" }.toMutableList()
-
-        adapter = BookingAdapter(activeBookings) { bookingId, newStatus ->
-            // Обновляем статус брони
-            updateBookingStatus(bookingId, newStatus)
-        }
-
         recyclerView.layoutManager = LinearLayoutManager(this)
+
+        bookings = mutableListOf()
+
+        // Инициализация адаптера
+        adapter = BookingAdapter(bookings) { bookingId, newStatus ->
+            //updateBookingStatus(bookingId, newStatus)
+        }
         recyclerView.adapter = adapter
 
-
-        findViewById<View>(R.id.buttonExit).setOnClickListener {
-            Firebase.auth.signOut()
-//
-            val intent = Intent(this, LoginActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK // Удаляем историю переходов
-            startActivity(intent)
-        }
+        // Загрузка бронирований из Firestore
+        loadBookingsFromFirestore()
     }
 
-    private fun updateBookingStatus(bookingId: String, newStatus: String) {
-        // Находим бронь и обновляем ее статус
-        bookings.find { it.id == bookingId }?.status = newStatus
-
-        // Обновляем адаптер только с активными бронями
-        val activeBookings = bookings.filter { it.status == "active" }
-        adapter.updateBookings(activeBookings)
+    private fun loadBookingsFromFirestore() {
+        firestore.collection("bookings")
+            .get()
+            .addOnSuccessListener { result ->
+                val activeBookings = mutableListOf<Booking>()
+                for (document in result) {
+                    val status = document.getString("status") ?: "unknown"
+                    if (status == "0") { // Проверка статуса для активных
+                        val booking = Booking(
+                            id = document.id,
+                            hotelName = document.getString("hotelName") ?: "",
+                            userName = document.getString("clientName") ?: "",
+                            clientPhone = document.getString("clientPhone") ?: "", // Номер телефона
+                            startDate = document.getString("startDate") ?: "",
+                            endDate = document.getString("endDate") ?: "",
+                            price = document.get("hotelPrice").toString(),
+                            roomType = document.getString("roomType") ?: "",
+                            bedDetails = "${document.getString("numberOfBeds")} кровати, ${document.getString("bedType")}",
+                            hotelImageRes = R.drawable.hotel_image,
+                            status = "active"
+                        )
+                        activeBookings.add(booking)
+                    }
+                }
+                adapter.updateBookings(activeBookings)
+            }
+            .addOnFailureListener { e ->
+                e.printStackTrace()
+            }
     }
+
+
+
+//    private fun updateBookingStatus(bookingId: String, newStatus: String) {
+        // Обновляем статус бронирования в Firestore
+//        Toast.makeText(this, bookingId, Toast.LENGTH_SHORT).show()
+//        firestore.collection("bookings").document(bookingId)
+//            .update("status", newStatus)
+//            .addOnSuccessListener {
+                // После обновления загружаем актуальный список
+//                loadBookingsFromFirestore()
+//            }
+//            .addOnFailureListener { e ->
+//                e.printStackTrace()
+//            }
+//    }
 }

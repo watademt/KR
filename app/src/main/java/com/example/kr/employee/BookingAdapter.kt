@@ -53,9 +53,12 @@ class BookingAdapter(
                 putExtra("room_type", booking.roomType)
                 putExtra("bed_details", booking.bedDetails)
                 putExtra("hotel_image", booking.hotelImageRes)
+                putExtra("client_name", booking.userName) // Передача ФИО
+                putExtra("client_phone", booking.clientPhone) // Передача номера телефона
             }
             context.startActivity(intent)
         }
+
     }
 
     override fun getItemCount() = bookings.size

@@ -45,7 +45,7 @@
             android:text="Тип комнаты: Люкс"
             android:textSize="16sp"
             android:layout_marginBottom="8dp"
-            android:textColor="@color/black" />
+            android:textColor="@color/button" />
 
         <!-- Количество и тип кроватей -->
         <TextView
@@ -55,7 +55,23 @@
             android:text="2 кровати, Кинг-сайз"
             android:textSize="16sp"
             android:layout_marginBottom="8dp"
-            android:textColor="@color/black" />
+            android:textColor="@color/button" />
+        <TextView
+            android:id="@+id/nameClient"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ФИО"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp"
+            android:textColor="@color/button" />
+        <TextView
+            android:id="@+id/phoneClient"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="телефон"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp"
+            android:textColor="@color/button" />
 
         <!-- Кнопки подтверждения и отмены -->
         <LinearLayout
