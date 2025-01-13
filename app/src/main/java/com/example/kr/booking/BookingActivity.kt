@@ -170,7 +170,8 @@ class BookingActivity : AppCompatActivity() {
                         "clientName" to clientName,
                         "clientPhone" to clientPhone,
                         "clientDOB" to clientDOB,
-                        "clientUID" to userId
+                        "clientUID" to userId,
+                        "status" to "0"
                     )
 
                     // Сохраняем данные в коллекции `bookings`
