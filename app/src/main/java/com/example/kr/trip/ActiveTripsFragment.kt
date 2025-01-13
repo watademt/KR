@@ -9,6 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.kr.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class ActiveTripsFragment : Fragment(R.layout.fragment_trips_list) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -22,6 +25,7 @@ class ActiveTripsFragment : Fragment(R.layout.fragment_trips_list) {
 
     private fun loadActiveTrips(recyclerView: RecyclerView) {
         val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
+        val currentDate = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
 
         FirebaseFirestore.getInstance()
             .collection("bookings")
@@ -30,14 +34,18 @@ class ActiveTripsFragment : Fragment(R.layout.fragment_trips_list) {
             .get()
             .addOnSuccessListener { result ->
                 val trips = result.mapNotNull { document ->
-                    Trip(
-                        name = document.getString("hotelName") ?: "",
-                        location = document.getString("hotelLocation") ?: "",
-                        dates = "${document.getString("startDate")} - ${document.getString("endDate")}",
-                        price = document.getDouble("hotelPrice")?.toString() ?: "",
-                        description = document.getString("hotelDescription") ?: "",
-                        imageResource = document.getString("hotelImageRes") ?: "default_image"
-                    )
+                    val endDate = document.getString("endDate") ?: ""
+                    // Отфильтровываем поездки, у которых дата окончания >= текущей даты
+                    if (endDate >= currentDate) {
+                        Trip(
+                            name = document.getString("hotelName") ?: "",
+                            location = document.getString("hotelLocation") ?: "",
+                            dates = "${document.getString("startDate")} - $endDate",
+                            price = document.getDouble("hotelPrice")?.toString() ?: "",
+                            description = document.getString("hotelDescription") ?: "",
+                            imageResource = document.getString("hotelImageRes") ?: "default_image"
+                        )
+                    } else null
                 }
                 recyclerView.adapter = TripsAdapter(trips, requireContext(), ::onLeaveReview, ::onRepeatBooking)
             }
