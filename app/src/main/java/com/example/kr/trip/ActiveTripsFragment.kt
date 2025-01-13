@@ -37,6 +37,9 @@ class ActiveTripsFragment : Fragment(R.layout.fragment_trips_list) {
             .addOnSuccessListener { result ->
                 val trips = result.mapNotNull { document ->
                     val endDate = document.getString("endDate") ?: ""
+                    val originalPrice = document.getDouble("hotelPrice") ?: 0.0
+                    val nights = document.getDouble("nights") ?: 0.0
+                    val modifiedPrice = originalPrice / nights
                     // Отфильтровываем поездки, у которых дата окончания >= текущей даты
                     if (endDate >= currentDate) {
                         Trip(
@@ -44,6 +47,7 @@ class ActiveTripsFragment : Fragment(R.layout.fragment_trips_list) {
                             location = document.getString("hotelLocation") ?: "",
                             dates = "${document.getString("startDate")} - $endDate",
                             price = document.getDouble("hotelPrice")?.toString() ?: "",
+                            pricePerNight = modifiedPrice.toString(),
                             description = document.getString("hotelDescription") ?: "",
                             imageResource = document.getString("hotelImageRes") ?: "default_image"
                         )
@@ -65,7 +69,7 @@ class ActiveTripsFragment : Fragment(R.layout.fragment_trips_list) {
         val intent = Intent(requireContext(), BookingActivity::class.java).apply {
             putExtra("hotel_name", trip.name)
             putExtra("hotel_description", trip.description)
-            putExtra("hotel_price", trip.price)
+            putExtra("hotel_price", trip.pricePerNight)
             putExtra("hotel_image_resource", trip.imageResource)
             putExtra("hotel_location", trip.location)
         }
